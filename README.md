@@ -25,7 +25,9 @@ Link will be avalible soon
 
 ## Initial Wireframes
 
+![Skärmbild 2024-10-28 151456](https://github.com/user-attachments/assets/a39fbcc8-e93d-4902-8690-e3581c4d268a)
 
+![Skärmbild 2024-10-28 151700](https://github.com/user-attachments/assets/70af471e-ec3e-4110-b2ee-f147837fce13)
 
 ## Final result
 
