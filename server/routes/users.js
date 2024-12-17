@@ -9,11 +9,7 @@ const { randomUUID } = require('crypto');
 router.use(cors());
 
 router.post('/add', function(req, res) {
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
-  let userName = req.body.userName;
-  let userEmail = req.body.userEmail;
-  let userPassword = req.body.userPassword;
+  let  {  firstName, lastName, userName, userEmail, userPassword } = req.body;
   let userId = randomUUID();
 
   let cryptoPassWord = cryptoJS.HmacSHA256(userPassword, process.env.SALT_KEY).toString();
@@ -52,8 +48,7 @@ router.post('/add', function(req, res) {
 })
 
 router.post("/login", (req,res) =>{
-  let userEmail = req.body.userEmail;
-  let userPassword = req.body.userPassword;
+  let{ userEmail, userPassword }= req.body;
 
   if (!userEmail || !userPassword) {
     return res.status(400).json({ message: "Email and password are required" });
