@@ -3,21 +3,68 @@ const router = express.Router();
 const cors = require('cors');
 let cryptoJS = require('crypto-js');
 require('dotenv').config();
+const { randomUUID } = require('crypto');
 
 
 router.use(cors());
 
+router.post('/add', function(req, res) {
+  let firstName = req.body.firstName;
+  let lastName = req.body.lastName;
+  let userName = req.body.userName;
+  let userEmail = req.body.userEmail;
+  let userPassword = req.body.userPassword;
+  let userId = randomUUID();
+
+  let cryptoPassWord = cryptoJS.HmacSHA256(userPassword, process.env.SALT_KEY).toString();
+
+      let sql = "INSERT into users (userId, userName, email, password, firstName, lastName) VALUES (?, ?, ?, ?, ?, ?)";
+      let values = [userId, userName, userEmail, cryptoPassWord, firstName, lastName];
+    
+      connection.query(sql, values, (err, result) => {
+        if (err) {
+          if(err.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({message: err.sqlMessage});
+          }
+          return res.status(500).json({message: "Server error while creating user"});
+        };
+      
+        let sql = `SELECT * FROM users WHERE userId = ?`
+        let values = [userId]
+    
+        connection.query(sql, values , (err, result) =>{
+          if (err) {
+            return res.status(500).json({message: "Get users not avalible"});
+          }
+    
+          result.map(user => {
+            delete user.password
+          });
+    
+          res.status(201).json(result);
+        })
+      })
+    
+    
+
+
+  
+})
+
 router.post("/login", (req,res) =>{
   let userEmail = req.body.userEmail;
   let userPassword = req.body.userPassword;
+
+  if (!userEmail || !userPassword) {
+    return res.status(400).json({ message: "Email and password are required" });
+  }
 
 
 let cryptoPassWord = cryptoJS.HmacSHA256(userPassword, process.env.SALT_KEY).toString();
 
   connection.connect((err) =>{
     if (err) {
-      console.log("err", err);
-      return res.status(500).json({ error: "Error connection to server." });
+      return res.status(500).json({ error: "Server error while login" });
     }
     
     let query = "SELECT * FROM users WHERE email = ? AND password = ?";
@@ -25,7 +72,9 @@ let cryptoPassWord = cryptoJS.HmacSHA256(userPassword, process.env.SALT_KEY).toS
 
     connection.query(query, values, (err, result) =>{
       console.log(result)
-      if (err) console.log("err", err);
+      if (err) {
+        return res.status(400).json({message: 'Login unavalible'})
+      }
 
       if (result.length > 0){
         result.map(user => {
