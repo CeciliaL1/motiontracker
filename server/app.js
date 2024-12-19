@@ -6,8 +6,9 @@ const logger = require("morgan");
 require("dotenv").config();
 const connection = require("./lib/conn.js");
 
-const usersRouter = require("./routes/users");
-const workoutSchedule = require("./routes/workoutSchedule");
+const usersRouter = require("./routes/users.js");
+const workoutSchedule = require("./routes/workoutSchedule.js");
+const profileSettings = require("./routes/profileSettings.js");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/users", usersRouter);
 app.use("/api/workout", workoutSchedule);
+app.use("/api/profile", profileSettings);
 
 app.use(function (req, res, next) {
   next(createError(404));
