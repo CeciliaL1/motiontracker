@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-let cryptoJS = require("crypto-js");
+const cryptoJS = require("crypto-js");
 require("dotenv").config();
 const { randomUUID } = require("crypto");
 
 router.use(cors());
 
 router.post("/add", (req, res) => {
-  let { firstName, lastName, userName, userEmail, userPassword } = req.body;
-  let userId = randomUUID();
+  const { firstName, lastName, userName, userEmail, userPassword } = req.body;
+  const userId = randomUUID();
 
-  let cryptoPassWord = cryptoJS
+  const cryptoPassWord = cryptoJS
     .HmacSHA256(userPassword, process.env.SALT_KEY)
     .toString();
 
-  let sql =
+  const sql =
     "INSERT into users (userId, userName, email, password, firstName, lastName) VALUES (?, ?, ?, ?, ?, ?)";
-  let values = [
+  const values = [
     userId,
     userName,
     userEmail,
@@ -36,8 +36,8 @@ router.post("/add", (req, res) => {
         .json({ message: "Server error while creating user" });
     }
 
-    let sql = `SELECT * FROM users WHERE userId = ?`;
-    let values = [userId];
+    const sql = `SELECT * FROM users WHERE userId = ?`;
+    const values = [userId];
 
     connection.query(sql, values, (err, result) => {
       if (err) {
@@ -54,13 +54,13 @@ router.post("/add", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  let { userEmail, userPassword } = req.body;
+  const { userEmail, userPassword } = req.body;
 
   if (!userEmail || !userPassword) {
     return res.status(400).json({ message: "Email and password are required" });
   }
 
-  let cryptoPassWord = cryptoJS
+  const cryptoPassWord = cryptoJS
     .HmacSHA256(userPassword, process.env.SALT_KEY)
     .toString();
 
@@ -69,8 +69,8 @@ router.post("/login", (req, res) => {
       return res.status(500).json({ error: "Server error while login" });
     }
 
-    let query = "SELECT * FROM users WHERE email = ? AND password = ?";
-    let values = [userEmail, cryptoPassWord];
+    const query = "SELECT * FROM users WHERE email = ? AND password = ?";
+    const values = [userEmail, cryptoPassWord];
 
     connection.query(query, values, (err, result) => {
       console.log(result);
@@ -87,6 +87,31 @@ router.post("/login", (req, res) => {
         res.status(401).json({ message: "Wrong email or password." });
       }
     });
+  });
+});
+
+router.put("/update/:userId", (req, res) => {
+  const userId = req.params.userId;
+  const { password } = req.body;
+
+  const cryptoPassWord = cryptoJS
+    .HmacSHA256(password, process.env.SALT_KEY)
+    .toString();
+
+  const sql = `UPDATE users SET password = ? WHERE userId = ?`;
+  const values = [cryptoPassWord, userId];
+
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error updating user password:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    if (result.affectedRows === 0) {
+      res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "Password uppdated successfully" });
   });
 });
 
