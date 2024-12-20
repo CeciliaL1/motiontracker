@@ -6,7 +6,8 @@ import { SignUp } from "./views/SignUp";
 import { Profile } from "./views/Profile";
 import { GenerateWorkout } from "./views/GenerateWorkout";
 import { Calendar } from "./views/Calendar";
-import { Home } from "./views/Home";
+import { Start } from "./views/Start";
+import { HowToUse } from "./views/HowToUse";
 
 export const Router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ export const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Start></Start>,
+      },
+      {
+        path: "/howtouse",
+        element: <HowToUse></HowToUse>,
       },
       {
         path: "/signin",
