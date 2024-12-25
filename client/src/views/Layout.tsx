@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router";
-import { Header } from "../components/styled/styledLayouts";
+import { Footer, Header } from "../components/styled/styledLayouts";
 import { useState } from "react";
 import { HamburgerMenu, NavMenu } from "../components/styled/styledMenu";
 
@@ -52,7 +52,25 @@ export const Layout = () => {
       <main>
         <Outlet></Outlet>
       </main>
-      <footer>Footer</footer>
+      <Footer>
+        <section>
+          <h2>MotionTracker</h2>
+          <a href="#">
+            <img src="./src/assets/motiontracker_svg.svg" alt="" />
+          </a>
+        </section>
+        <section>
+          <div>ThisAddress 345</div>
+          <div>
+            <a href="#">info@motiontracker.se</a>
+            <a href="#">070 123 45 67</a>
+          </div>
+        </section>
+        <section>
+          <i className="fa-brands fa-instagram"></i>
+          <i className="fa-brands fa-facebook"></i>
+        </section>
+      </Footer>
     </>
   );
 };
