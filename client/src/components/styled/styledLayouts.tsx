@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -59,4 +62,10 @@ export const Footer = styled.footer`
   }
 `;
 
-export const Main = styled.main``;
+export const Main = styled.main`
+  font-family: "Raleway", serif;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 100px;
+`;

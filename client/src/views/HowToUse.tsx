@@ -1,3 +1,7 @@
 export const HowToUse = () => {
-  return <> how to use</>;
+  return (
+    <>
+      <section></section>
+    </>
+  );
 };

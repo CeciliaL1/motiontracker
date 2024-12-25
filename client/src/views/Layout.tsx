@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router";
-import { Footer, Header } from "../components/styled/styledLayouts";
+import { Footer, Header, Main } from "../components/styled/styledLayouts";
 import { useState } from "react";
 import { HamburgerMenu, NavMenu } from "../components/styled/styledMenu";
 
@@ -49,9 +49,9 @@ export const Layout = () => {
           <div></div>
         </HamburgerMenu>
       </Header>
-      <main>
+      <Main>
         <Outlet></Outlet>
-      </main>
+      </Main>
       <Footer>
         <section>
           <h2>MotionTracker</h2>
