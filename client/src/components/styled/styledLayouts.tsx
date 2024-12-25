@@ -18,7 +18,7 @@ export const Header = styled.header`
 export const Footer = styled.footer`
   width: 100%;
   height: 30%;
-  position: fixed;
+  position: relative;
   bottom: 0;
   background-color: #88ab8e;
   font-family: "Raleway", serif;
