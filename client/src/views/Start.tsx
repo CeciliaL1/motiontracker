@@ -29,7 +29,7 @@ export const Start = () => {
           />
           <LinkWrap>
             <Link to="/howtouse">How to use</Link>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>
         </div>
       </Wrapper>
