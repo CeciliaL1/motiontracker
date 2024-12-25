@@ -24,7 +24,7 @@ export const HowToUse = () => {
           <ImageWrapper
             width={350}
             margin={50}
-            src="./src/assets/how-to-use-motiontracker.webp"
+            src="public/how-to-use-motiontracker.webp"
             alt=""
           />
           <LinkWrap>

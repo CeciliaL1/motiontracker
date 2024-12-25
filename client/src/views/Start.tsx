@@ -24,7 +24,7 @@ export const Start = () => {
           <ImageWrapper
             width={350}
             margin={50}
-            src="./src/assets/image-front-page-motiontracker.webp"
+            src="public/image-front-page-motiontracker.webp"
             alt=""
           />
           <LinkWrap>

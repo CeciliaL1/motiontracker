@@ -13,7 +13,7 @@ export const Layout = () => {
     <>
       <Header>
         <a href="#">
-          <img src="./src/assets/motiontracker_svg.svg" alt="" />
+          <img src="public/motiontracker_svg.svg" alt="" />
         </a>
 
         <NavMenu open={open}>
@@ -56,7 +56,7 @@ export const Layout = () => {
         <section>
           <h2>MotionTracker</h2>
           <a href="#">
-            <img src="./src/assets/motiontracker_svg.svg" alt="" />
+            <img src="public/motiontracker_svg.svg" alt="" />
           </a>
         </section>
         <section>
