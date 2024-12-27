@@ -11,16 +11,19 @@ export const NavMenu = styled.nav<IMenyProps>`
     display: flex;
     flex-direction: row;
     list-style: none;
+    margin-left: 100px;
   }
   li {
     margin: 10px;
     font-size: 1.2rem;
+    font-family: "Raleway", serif;
   }
   a {
     text-decoration: none;
     color: black;
     letter-spacing: 1px;
   }
+
   @media screen and (max-width: 801px) {
     ul {
       display: none;
@@ -42,21 +45,27 @@ export const NavMenu = styled.nav<IMenyProps>`
             width: 100vw;
             padding: 0;
             color: black;
+            text-align: center;
+            z-index: 0;
           }
           li:nth-child(1) {
-            margin-top: 100px;
+            margin-top: 150px;
           }
           li {
-            margin-top: 30px;
+            margin-top: 50px;
             font-size: 1.2rem;
           }
           a {
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
             color: black;
           }
         `
       : ""}
 `;
 export const HamburgerMenu = styled.div<IMenyProps>`
+  display: none;
   @media screen and (max-width: 800px) {
     width: 2rem;
     height: 2rem;

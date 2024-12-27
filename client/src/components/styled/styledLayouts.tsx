@@ -5,9 +5,10 @@ export const Header = styled.header`
   top: 0;
   width: 100%;
   display: flex;
+  gap: 100px;
 
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #88ab8e;
 
   img {
@@ -21,6 +22,7 @@ export const Footer = styled.footer`
   height: 300px;
   position: relative;
   bottom: 0;
+  z-index: -1;
 
   background-color: #88ab8e;
   font-family: "Raleway", serif;
@@ -71,7 +73,7 @@ export const Footer = styled.footer`
 export const Main = styled.main`
   font-family: "Raleway", serif;
   min-height: 70vh;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: auto;
   margin-top: 100px;
 `;
