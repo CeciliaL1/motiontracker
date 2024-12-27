@@ -13,9 +13,9 @@ interface IWrapperProps {
 
 interface ILinkWrapperProps {
   margintop: number;
-  fontweight?: number;
+  fontWeight?: number;
   marginleft: number;
-  fontsize: number;
+  fontSize: number;
 }
 
 export const Wrapper = styled.div<IWrapperProps>`
@@ -40,10 +40,10 @@ export const LinkWrap = styled.div<ILinkWrapperProps>`
     margin-left: ${(props) => props.marginleft}px;
     margin-right: 10px;
     margin-top: ${(props) => props.margintop}px;
-    font-weight: ${(props) => props.fontweight};
+    font-weight: ${(props) => props.fontWeight};
 
     letter-spacing: 1px;
-    font-size: ${(props) => props.fontsize}rem;
+    font-size: ${(props) => props.fontSize}rem;
   }
   a:hover {
     text-decoration: underline;
