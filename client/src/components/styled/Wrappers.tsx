@@ -9,6 +9,7 @@ interface IWrapperProps {
   direction: string;
   margintop: number;
   marginleft?: number;
+  gap: number;
 }
 
 interface ILinkWrapperProps {
@@ -25,7 +26,7 @@ export const Wrapper = styled.div<IWrapperProps>`
   margin-left: ${(props) => props.marginleft}%;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: ${(props) => props.gap}px;
 `;
 
 export const ImageWrapper = styled.img<IImageWrapperProps>`
@@ -40,6 +41,7 @@ export const LinkWrap = styled.div<ILinkWrapperProps>`
     margin-left: ${(props) => props.marginleft}px;
     margin-right: 10px;
     margin-top: ${(props) => props.margintop}px;
+    margin-bottom: 20px;
     font-weight: ${(props) => props.fontWeight};
 
     letter-spacing: 1px;
@@ -50,5 +52,28 @@ export const LinkWrap = styled.div<ILinkWrapperProps>`
   }
   i {
     font-size: 1%.5;
+  }
+`;
+
+export const NotFoundWrapper = styled.div`
+  padding: 50px;
+  height: 400px;
+  width: 700px;
+  position: absolute;
+  top: 90px;
+  left: 250px;
+  font-family: "Raleway", serif;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+
+  background-color: #dbe3db;
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 `;

@@ -28,3 +28,10 @@ export const LongText = styled.div`
     padding-right: 10px;
   }
 `;
+
+export const NotFoundDescription = styled.p`
+  font-family: "Roboto", serif;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 20px;
+`;

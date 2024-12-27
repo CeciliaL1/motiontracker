@@ -5,7 +5,7 @@ import { Wrapper, ImageWrapper, LinkWrap } from "../components/styled/Wrappers";
 export const HowToUse = () => {
   return (
     <>
-      <Wrapper direction="row" margintop={15}>
+      <Wrapper direction="row" margintop={15} gap={20}>
         <LongText>
           <Heading1 margintop={30} marginbottom={50} marginleft={40}>
             How to use MotionTracker
@@ -18,7 +18,7 @@ export const HowToUse = () => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </LongText>
-        <div>
+        <Wrapper direction="column" margintop={0.5} gap={7}>
           <ImageWrapper
             width={350}
             margin={10}
@@ -28,13 +28,22 @@ export const HowToUse = () => {
           <LinkWrap
             margintop={5}
             marginleft={250}
-            fontsize={1}
-            fontweight={700}
+            fontSize={1}
+            fontWeight={700}
           >
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/signin">Sign in</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>
-        </div>
+          <LinkWrap
+            margintop={15}
+            marginleft={250}
+            fontSize={1}
+            fontWeight={700}
+          >
+            <Link to="/signup">Sign up</Link>
+            <i className="fa-solid fa-arrow-right"></i>
+          </LinkWrap>
+        </Wrapper>
       </Wrapper>
     </>
   );
