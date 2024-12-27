@@ -1,15 +1,11 @@
 import { Link } from "react-router";
-import {
-  Heading1,
-  LinkWrap,
-  LongText,
-} from "../components/styled/styledTextContent";
-import { ImageWrapper, Wrapper } from "../components/styled/Wrappers";
+import { Heading1, LongText } from "../components/styled/styledTextContent";
+import { ImageWrapper, LinkWrap, Wrapper } from "../components/styled/Wrappers";
 
 export const Start = () => {
   return (
     <>
-      <Wrapper direction="row">
+      <Wrapper direction="row" margintop={15}>
         <LongText>
           <Heading1>Welcome to MotionTracker</Heading1>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -23,11 +19,11 @@ export const Start = () => {
         <div>
           <ImageWrapper
             width={350}
-            margin={50}
+            margin={10}
             src="public/image-front-page-motiontracker.webp"
             alt=""
           />
-          <LinkWrap>
+          <LinkWrap margintop={5}>
             <Link to="/howtouse">How to use</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>

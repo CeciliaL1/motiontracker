@@ -5,6 +5,7 @@ export const Header = styled.header`
   top: 0;
   width: 100%;
   display: flex;
+
   flex-direction: row;
   justify-content: space-between;
   background-color: #88ab8e;
@@ -17,13 +18,18 @@ export const Header = styled.header`
 
 export const Footer = styled.footer`
   width: 100%;
-  height: 30%;
+  height: 300px;
   position: relative;
   bottom: 0;
+
   background-color: #88ab8e;
   font-family: "Raleway", serif;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 800px) {
+    margin-top: 100px;
+  }
 
   img {
     height: 85px;
@@ -64,7 +70,7 @@ export const Footer = styled.footer`
 
 export const Main = styled.main`
   font-family: "Raleway", serif;
-  min-height: 100vh;
+  min-height: 70vh;
   max-width: 1200px;
   margin: auto;
   margin-top: 100px;

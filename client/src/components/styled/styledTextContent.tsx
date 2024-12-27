@@ -19,16 +19,3 @@ export const LongText = styled.div`
     padding-right: 10px;
   }
 `;
-
-export const LinkWrap = styled.div`
-  a {
-    text-decoration: none;
-    color: black;
-    margin-left: 250px;
-    margin-right: 10px;
-    font-size: 1rem;
-  }
-  i {
-    font-size: 1%.5;
-  }
-`;
