@@ -23,11 +23,11 @@ export const HowToUse = () => {
             src="public/how-to-use-motiontracker.webp"
             alt=""
           />
+          <LinkWrap margintop={5}>
+            <Link to="/signup">Sign Up</Link>
+            <i className="fa-solid fa-arrow-right"></i>
+          </LinkWrap>
         </div>
-        <LinkWrap margintop={5}>
-          <Link to="/signup">Sign Up</Link>
-          <i className="fa-solid fa-arrow-right"></i>
-        </LinkWrap>
       </Wrapper>
     </>
   );

@@ -15,6 +15,7 @@ export const NavMenu = styled.nav<IMenyProps>`
   }
   li {
     margin: 10px;
+    margin-left: 20px;
     font-size: 1.2rem;
     font-family: "Raleway", serif;
   }
@@ -22,6 +23,7 @@ export const NavMenu = styled.nav<IMenyProps>`
     text-decoration: none;
     color: black;
     letter-spacing: 1px;
+    font-weight: 700;
   }
 
   @media screen and (max-width: 801px) {

@@ -35,6 +35,8 @@ export const LinkWrap = styled.div<ILinkWrapperProps>`
     margin-left: 250px;
     margin-right: 10px;
     margin-top: ${(props) => props.margintop}px;
+    font-weight: 700;
+    letter-spacing: 1px;
 
     font-size: 1rem;
   }

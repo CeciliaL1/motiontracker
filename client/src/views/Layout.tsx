@@ -10,6 +10,11 @@ export const Layout = () => {
   const handleClick = () => {
     setOpen(!open);
   };
+  const handleMenuClick = () => {
+    if (open) {
+      setOpen(!open);
+    }
+  };
   return (
     <>
       <Header>
@@ -44,7 +49,7 @@ export const Layout = () => {
               }}
               whileHover={{ scale: 1.2 }}
             >
-              <NavLink to="/" onClick={handleClick}>
+              <NavLink to="/" onClick={handleMenuClick}>
                 Start
               </NavLink>
             </motion.li>
@@ -61,7 +66,7 @@ export const Layout = () => {
               }}
               whileHover={{ scale: 1.2 }}
             >
-              <NavLink to="/howtouse" onClick={handleClick}>
+              <NavLink to="/howtouse" onClick={handleMenuClick}>
                 How to use
               </NavLink>
             </motion.li>
@@ -79,7 +84,7 @@ export const Layout = () => {
               whileHover={{ scale: 1.2 }}
             >
               {" "}
-              <NavLink to="/signin" onClick={handleClick}>
+              <NavLink to="/signin" onClick={handleMenuClick}>
                 Sign in
               </NavLink>
             </motion.li>
@@ -97,7 +102,7 @@ export const Layout = () => {
               whileHover={{ scale: 1.2 }}
             >
               {" "}
-              <NavLink to="/signup" onClick={handleClick}>
+              <NavLink to="/signup" onClick={handleMenuClick}>
                 Sign up
               </NavLink>
             </motion.li>
