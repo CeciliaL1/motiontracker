@@ -7,7 +7,9 @@ export const Start = () => {
     <>
       <Wrapper direction="row" margintop={15}>
         <LongText>
-          <Heading1>Welcome to MotionTracker</Heading1>
+          <Heading1 margintop={30} marginbottom={50} marginleft={40}>
+            Welcome to MotionTracker
+          </Heading1>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -23,7 +25,12 @@ export const Start = () => {
             src="public/image-front-page-motiontracker.webp"
             alt=""
           />
-          <LinkWrap margintop={5}>
+          <LinkWrap
+            margintop={5}
+            marginleft={250}
+            fontsize={1}
+            fontweight={700}
+          >
             <Link to="/howtouse">How to use</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>

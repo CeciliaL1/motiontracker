@@ -7,7 +7,9 @@ export const HowToUse = () => {
     <>
       <Wrapper direction="row" margintop={15}>
         <LongText>
-          <Heading1>How to use MotionTracker</Heading1>
+          <Heading1 margintop={30} marginbottom={50} marginleft={40}>
+            How to use MotionTracker
+          </Heading1>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -23,7 +25,12 @@ export const HowToUse = () => {
             src="public/how-to-use-motiontracker.webp"
             alt=""
           />
-          <LinkWrap margintop={5}>
+          <LinkWrap
+            margintop={5}
+            marginleft={250}
+            fontsize={1}
+            fontweight={700}
+          >
             <Link to="/signup">Sign Up</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>
