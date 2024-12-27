@@ -8,6 +8,7 @@ import { GenerateWorkout } from "./views/GenerateWorkout";
 import { Calendar } from "./views/Calendar";
 import { Start } from "./views/Start";
 import { HowToUse } from "./views/HowToUse";
+import { ForgotPassword } from "./views/forgotPassword";
 
 export const Router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const Router = createBrowserRouter([
       {
         path: "/calender",
         element: <Calendar></Calendar>,
+      },
+      {
+        path: "/forgotpassword",
+        element: <ForgotPassword></ForgotPassword>,
       },
     ],
   },

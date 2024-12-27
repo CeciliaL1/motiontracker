@@ -10,6 +10,7 @@ export const PrimaryButton = styled.button<IButtonProps>`
   height: 35px;
   width: 350px;
   margin-top: ${(props) => props.margintop}px;
+  margin-bottom: ${(props) => props.marginbottom}px;
 
   border: 1px solid transparent;
 

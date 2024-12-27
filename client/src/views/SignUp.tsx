@@ -38,7 +38,9 @@ export const SignUp = () => {
             <option value="healthCareWorker">Health care worker</option>
           </PurposeOfUse>
 
-          <PrimaryButton margintop={50}>Sign up</PrimaryButton>
+          <PrimaryButton margintop={50} marginbottom={10}>
+            Sign up
+          </PrimaryButton>
           <LinkWrap
             margintop={5}
             marginleft={250}
