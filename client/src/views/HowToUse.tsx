@@ -28,8 +28,8 @@ export const HowToUse = () => {
           <LinkWrap
             margintop={5}
             marginleft={250}
-            fontSize={1}
-            fontWeight={700}
+            fontsize={1}
+            fontweight={700}
           >
             <Link to="/signin">Sign in</Link>
             <i className="fa-solid fa-arrow-right"></i>
@@ -37,8 +37,8 @@ export const HowToUse = () => {
           <LinkWrap
             margintop={15}
             marginleft={250}
-            fontSize={1}
-            fontWeight={700}
+            fontsize={1}
+            fontweight={700}
           >
             <Link to="/signup">Sign up</Link>
             <i className="fa-solid fa-arrow-right"></i>

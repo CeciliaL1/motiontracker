@@ -8,7 +8,7 @@ import { GenerateWorkout } from "./views/GenerateWorkout";
 import { Calendar } from "./views/Calendar";
 import { Start } from "./views/Start";
 import { HowToUse } from "./views/HowToUse";
-import { ForgotPassword } from "./views/forgotPassword";
+import { ForgotPassword } from "./views/ForgotPassword";
 
 export const Router = createBrowserRouter([
   {

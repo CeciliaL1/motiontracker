@@ -15,8 +15,8 @@ export const ForgotPassword = () => {
           <LinkWrap
             margintop={15}
             marginleft={250}
-            fontSize={0.9}
-            fontWeight={500}
+            fontsize={0.9}
+            fontweight={500}
           >
             <Link to="/signin">Back to sign in</Link>
           </LinkWrap>

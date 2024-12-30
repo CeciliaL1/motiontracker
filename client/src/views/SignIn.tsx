@@ -19,8 +19,8 @@ export const SignIn = () => {
           <LinkWrap
             margintop={5}
             marginleft={200}
-            fontSize={0.9}
-            fontWeight={500}
+            fontsize={0.9}
+            fontweight={500}
           >
             <Link to="/forgotpassword">Forgot password?</Link>
           </LinkWrap>

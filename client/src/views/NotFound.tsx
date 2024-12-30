@@ -18,7 +18,7 @@ export const NotFound = () => {
           <NotFoundDescription>
             Oops! The page you are looking for does not exist!
           </NotFoundDescription>
-          <LinkWrap margintop={5} marginleft={0} fontSize={1} fontWeight={700}>
+          <LinkWrap margintop={5} marginleft={0} fontsize={1} fontweight={700}>
             <Link to="/">Go to start</Link>
           </LinkWrap>
         </Wrapper>
