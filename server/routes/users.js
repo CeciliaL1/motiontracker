@@ -62,7 +62,6 @@ router.post("/add", (req, res) => {
 router.post("/login", (req, res) => {
   const { userEmail, userPassword } = req.body;
 
-  console.log(process.env.JWT_SECRET);
   if (!userEmail || !userPassword) {
     return res.status(400).json({ message: "Email and password are required" });
   }
@@ -80,7 +79,6 @@ router.post("/login", (req, res) => {
     const values = [userEmail, cryptoPassWord];
 
     connection.query(query, values, (err, result) => {
-      console.log(result);
       if (err) {
         return res.status(400).json({ message: "Login unavalible" });
       }
@@ -123,7 +121,7 @@ router.post("/login", (req, res) => {
           });
         });
       } else {
-        res.status(401).json({ message: "Wrong email or password." });
+        return res.json({ message: "Wrong email or password." });
       }
     });
   });
