@@ -4,41 +4,89 @@ import {
   Email,
   FirstName,
   Form,
-  Gender,
   LastName,
   Name,
   Password,
-  PurposeOfUse,
 } from "../components/styled/styledInputs";
 import { Heading2 } from "../components/styled/styledTextContent";
 import { LinkWrap, Wrapper } from "../components/styled/Wrappers";
+import { useState } from "react";
+import { IUserLogin, IUserSignUp } from "../models/IUsers";
+import { postData } from "../services/serviceBase";
 
 export const SignUp = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
+  const userData: IUserSignUp = {
+    firstName: firstName,
+    lastName: lastName,
+    userEmail: userEmail,
+    userName: userName,
+    userPassword: userPassword,
+  };
+
+  const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await postData<IUserSignUp, IUserLogin>(
+      "http://localhost:3000/api/users/add",
+      userData,
+      headers
+    );
+    console.log(response);
+  };
+
   return (
     <>
       <Wrapper direction="column" margintop={15}>
         <Form>
           <Heading2 marginbottom={20}>Sign up</Heading2>
-          <FirstName></FirstName>
-          <LastName></LastName>
-          <Email></Email>
-          <Name></Name>
-          <Password></Password>
-          <Gender>
-            <option value="">Gender</option>
-            <option value="woman">Woman</option>
-            <option value="man">Man</option>
-            <option value="PreferNotToAnswer">Prefer not to specify</option>
-          </Gender>
-          <PurposeOfUse>
-            <option value="">Purpose of use</option>
-            <option value="ataxia">Ataxia</option>
-            <option value="parkinsson">Parkinssons</option>
-            <option value="multipleSclerosis">Multiple sclerosis</option>
-            <option value="healthCareWorker">Health care worker</option>
-          </PurposeOfUse>
+          <FirstName
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+          ></FirstName>
+          <LastName
+            value={lastName}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+          ></LastName>
+          <Email
+            value={userEmail}
+            onChange={(e) => {
+              setUserEmail(e.target.value);
+            }}
+          ></Email>
+          <Name
+            value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          ></Name>
+          <Password
+            value={userPassword}
+            onChange={(e) => {
+              setUserPassword(e.target.value);
+            }}
+          ></Password>
 
-          <PrimaryButton margintop={50} marginbottom={10}>
+          <PrimaryButton
+            margintop={50}
+            marginbottom={10}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              handleSignUp(e);
+            }}
+          >
             Sign up
           </PrimaryButton>
           <LinkWrap

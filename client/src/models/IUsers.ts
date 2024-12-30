@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserLogin {
     userId: string;
     userName: string;
     email: string;
@@ -12,10 +12,17 @@ export interface ILoginUser {
 
 }
 export interface ILoggedIn {
- user: IUser;
+ user: IUserLogin;
  token: string;
  refreshToken: string;
  message?: string;
-    
+}
 
+
+export interface IUserSignUp {
+    firstName: string;
+    lastName: string;
+    userEmail: string;
+    userName: string;
+    userPassword: string;
 }
