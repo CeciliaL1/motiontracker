@@ -2,6 +2,8 @@ import { css, styled } from "styled-components";
 
 interface IMenyProps {
   open: boolean;
+  background?: string;
+  size?: string;
 }
 
 export const NavMenu = styled.nav<IMenyProps>`
@@ -24,6 +26,12 @@ export const NavMenu = styled.nav<IMenyProps>`
     color: black;
     letter-spacing: 1px;
     font-weight: 700;
+  }
+  li i {
+    padding: 7px;
+    border-radius: 50%;
+    background-color: #${(props) => props.background};
+    font-size: ${(props) => props.size}rem;
   }
 
   @media screen and (max-width: 801px) {

@@ -1,10 +1,24 @@
 import { NavLink, Outlet } from "react-router";
 import { Footer, Header, Main } from "../components/styled/styledLayouts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HamburgerMenu, NavMenu } from "../components/styled/styledMenu";
 import { motion } from "framer-motion";
+import { getLocalStorage } from "../helperfuntions/getLocalStorage";
+import { IUserLogin } from "../models/IUsers";
 
 export const Layout = () => {
+  const [storedUser, setStoredUser] = useState<IUserLogin | undefined>();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const localStorage = await getLocalStorage<IUserLogin>("user");
+      setStoredUser(localStorage);
+    };
+    checkUser();
+  }, []);
+
+  const isLoggedin = storedUser ? Object.keys(storedUser).length : 0;
+
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -33,81 +47,104 @@ export const Layout = () => {
         >
           <img src="public/motiontracker_svg.svg" alt="" />
         </motion.a>
+        {isLoggedin === 0 && (
+          <NavMenu open={open}>
+            <ul>
+              <motion.li
+                initial={{
+                  opacity: 0,
+                }}
+                whileInView={{
+                  opacity: 1,
 
-        <NavMenu open={open}>
-          <ul>
-            <motion.li
-              initial={{
-                opacity: 0,
-              }}
-              whileInView={{
-                opacity: 1,
+                  transition: {
+                    duration: 1,
+                  },
+                }}
+                whileHover={{ scale: 1.2 }}
+              >
+                <NavLink to="/" onClick={handleMenuClick}>
+                  Start
+                </NavLink>
+              </motion.li>
+              <motion.li
+                initial={{
+                  opacity: 0,
+                }}
+                whileInView={{
+                  opacity: 1,
 
-                transition: {
-                  duration: 1,
-                },
-              }}
-              whileHover={{ scale: 1.2 }}
-            >
-              <NavLink to="/" onClick={handleMenuClick}>
-                Start
-              </NavLink>
-            </motion.li>
-            <motion.li
-              initial={{
-                opacity: 0,
-              }}
-              whileInView={{
-                opacity: 1,
+                  transition: {
+                    duration: 1,
+                  },
+                }}
+                whileHover={{ scale: 1.2 }}
+              >
+                <NavLink to="/howtouse" onClick={handleMenuClick}>
+                  How to use
+                </NavLink>
+              </motion.li>
+              <motion.li
+                initial={{
+                  opacity: 0,
+                }}
+                whileInView={{
+                  opacity: 1,
 
-                transition: {
-                  duration: 1,
-                },
-              }}
-              whileHover={{ scale: 1.2 }}
-            >
-              <NavLink to="/howtouse" onClick={handleMenuClick}>
-                How to use
-              </NavLink>
-            </motion.li>
-            <motion.li
-              initial={{
-                opacity: 0,
-              }}
-              whileInView={{
-                opacity: 1,
+                  transition: {
+                    duration: 1,
+                  },
+                }}
+                whileHover={{ scale: 1.2 }}
+              >
+                {" "}
+                <NavLink to="/signin" onClick={handleMenuClick}>
+                  Sign in
+                </NavLink>
+              </motion.li>
+              <motion.li
+                initial={{
+                  opacity: 0,
+                }}
+                whileInView={{
+                  opacity: 1,
 
-                transition: {
-                  duration: 1,
-                },
-              }}
-              whileHover={{ scale: 1.2 }}
-            >
-              {" "}
-              <NavLink to="/signin" onClick={handleMenuClick}>
-                Sign in
-              </NavLink>
-            </motion.li>
-            <motion.li
-              initial={{
-                opacity: 0,
-              }}
-              whileInView={{
-                opacity: 1,
+                  transition: {
+                    duration: 1,
+                  },
+                }}
+                whileHover={{ scale: 1.2 }}
+              >
+                {" "}
+                <NavLink to="/signup" onClick={handleMenuClick}>
+                  Sign up
+                </NavLink>
+              </motion.li>
+            </ul>
+          </NavMenu>
+        )}
 
-                transition: {
-                  duration: 1,
-                },
-              }}
-              whileHover={{ scale: 1.2 }}
-            >
-              {" "}
-              <NavLink to="/signup" onClick={handleMenuClick}>
-                Sign up
-              </NavLink>
-            </motion.li>
-          </ul>
-        </NavMenu>
+        {isLoggedin > 0 && (
+          <NavMenu open={open} background="D9D9D9" size="1.8">
+            <ul>
+              <li>
+                <NavLink to="/profile">
+                  <i className="fa-solid fa-user"></i>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/workout">
+                  <i className="fa-solid fa-gears"></i>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/calendar">
+                  <i className="fa-regular fa-calendar"></i>
+                </NavLink>
+              </li>
+            </ul>
+          </NavMenu>
+        )}
 
         <HamburgerMenu open={open} onClick={handleClick}>
           <div></div>

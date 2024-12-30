@@ -41,7 +41,7 @@ export const Router = createBrowserRouter([
         element: <GenerateWorkout></GenerateWorkout>,
       },
       {
-        path: "/calender",
+        path: "/calendar",
         element: <Calendar></Calendar>,
       },
       {
