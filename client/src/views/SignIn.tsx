@@ -7,12 +7,15 @@ import { Email, Form, Password } from "../components/styled/styledInputs";
 import { Heading2 } from "../components/styled/styledTextContent";
 
 import { LinkWrap, Wrapper } from "../components/styled/Wrappers";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postData } from "../services/serviceBase";
 import { setLocalStorage } from "../helperfuntions/setLocalStorage";
 import { ILoggedIn, ILoginUser } from "../models/IUsers";
+import { ActionType } from "../reducers/userReducer";
+import { UserContext } from "../context/UserContext";
 
 export const SignIn = () => {
+  const { dispatch } = useContext(UserContext);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -32,17 +35,26 @@ export const SignIn = () => {
       "Content-Type": "application/json",
     };
 
-    const response = await postData<ILoginUser, ILoggedIn>(
-      "http://localhost:3000/api/users/login",
-      userData,
-      headers
-    );
-    if (response.message) {
-      setErrorMessage(response.message);
+    try {
+      const response = await postData<ILoginUser, ILoggedIn>(
+        "http://localhost:3000/api/users/login",
+        userData,
+        headers
+      );
+      if (response.message) {
+        setErrorMessage(response.message);
+        setIsError(true);
+      }
+
+      setLocalStorage("user", response.user);
+      setLocalStorage("token", response.token);
+
+      dispatch({ type: ActionType.LOGIN, payload: response.user });
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setErrorMessage("Something went wrong. Please try again.");
       setIsError(true);
     }
-    setLocalStorage("user", response.user);
-    setLocalStorage("token", response.token);
   };
   return (
     <>

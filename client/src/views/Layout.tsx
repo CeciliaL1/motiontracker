@@ -1,24 +1,13 @@
 import { NavLink, Outlet } from "react-router";
 import { Footer, Header, Main } from "../components/styled/styledLayouts";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { HamburgerMenu, NavMenu } from "../components/styled/styledMenu";
 import { motion } from "framer-motion";
-import { getLocalStorage } from "../helperfuntions/getLocalStorage";
-import { IUserLogin } from "../models/IUsers";
+import { UserContext } from "../context/UserContext";
+import { ActionType } from "../reducers/userReducer";
 
 export const Layout = () => {
-  const [storedUser, setStoredUser] = useState<IUserLogin | undefined>();
-
-  useEffect(() => {
-    const checkUser = async () => {
-      const localStorage = await getLocalStorage<IUserLogin>("user");
-      setStoredUser(localStorage);
-    };
-    checkUser();
-  }, []);
-
-  const isLoggedin = storedUser ? Object.keys(storedUser).length : 0;
-
+  const { state, dispatch } = useContext(UserContext);
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -28,6 +17,9 @@ export const Layout = () => {
     if (open) {
       setOpen(!open);
     }
+  };
+  const handleLogOut = () => {
+    dispatch({ type: ActionType.LOGOUT, payload: null });
   };
   return (
     <>
@@ -47,7 +39,7 @@ export const Layout = () => {
         >
           <img src="public/motiontracker_svg.svg" alt="" />
         </motion.a>
-        {isLoggedin === 0 && (
+        {!state.isAuthenticated && (
           <NavMenu open={open}>
             <ul>
               <motion.li
@@ -124,7 +116,7 @@ export const Layout = () => {
           </NavMenu>
         )}
 
-        {isLoggedin > 0 && (
+        {state.isAuthenticated && (
           <NavMenu open={open} background="D9D9D9" size="1.8">
             <ul>
               <li>
@@ -141,6 +133,9 @@ export const Layout = () => {
                 <NavLink to="/calendar">
                   <i className="fa-regular fa-calendar"></i>
                 </NavLink>
+              </li>
+              <li onClick={handleLogOut}>
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>
               </li>
             </ul>
           </NavMenu>
