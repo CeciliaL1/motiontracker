@@ -35,8 +35,9 @@ router.post("/add", (req, res) => {
   connection.query(sql, values, (err, result) => {
     if (err) {
       if (err.code === "ER_DUP_ENTRY") {
-        return res.status(409).json({ message: err.sqlMessage });
+        return res.json({ message: err.sqlMessage });
       }
+      console.log(err);
       return res
         .status(500)
         .json({ message: "Server error while creating user" });
@@ -47,14 +48,10 @@ router.post("/add", (req, res) => {
 
     connection.query(sql, values, (err, result) => {
       if (err) {
-        return res.status(500).json({ message: "Get users not avalible" });
+        return res.json({ message: "Get users not avalible" });
       }
 
-      result.map((user) => {
-        delete user.password;
-      });
-
-      res.status(201).json(result);
+      res.json({ message: "User created succesfully" });
     });
   });
 });
