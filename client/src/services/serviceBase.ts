@@ -7,6 +7,7 @@ export const getData = async <T>(url:string): Promise<T> => {
 
 export const postData = async <T>(url: string, data: T, headers: object): Promise<T> => {
     const response = await axios.post<T>(url, data, {headers : headers});
+    console.log("post", response)
     return response.data;
 
 }
