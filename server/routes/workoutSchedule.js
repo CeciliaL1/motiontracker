@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
+const verifyToken = require("../middleware/verifyToken");
 
 router.use(cors());
 
-router.get("/:userId", (req, res) => {
+router.get("/:userId", verifyToken, (req, res) => {
   const userId = req.params.userId;
-  console.log(userId);
+  console.log(req.user);
 
   const sql = "SELECT * FROM workout_schedule WHERE userId = ?";
   const value = [userId];
@@ -22,7 +23,7 @@ router.get("/:userId", (req, res) => {
   });
 });
 
-router.post("/create", (req, res) => {
+router.post("/create", verifyToken, (req, res) => {
   const { userId, workoutDetails } = req.body;
 
   const sql =
@@ -47,7 +48,7 @@ router.post("/create", (req, res) => {
   });
 });
 
-router.put("/update/:userId", (req, res) => {
+router.put("/update/:userId", verifyToken, (req, res) => {
   const userId = req.params.userId;
   const { workoutDetails } = req.body;
 

@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 require("dotenv").config();
+const verifyToken = require("../middleware/verifyToken");
 
 router.use(cors());
 
-router.get("/:userId", (req, res) => {
+router.get("/:userId", verifyToken, (req, res) => {
   const userId = req.params.userId;
 
   const sql = `SELECT * FROM profile_settings WHERE userId = ?`;
@@ -26,7 +27,7 @@ router.get("/:userId", (req, res) => {
   });
 });
 
-router.post("/add", (req, res) => {
+router.post("/add", verifyToken, (req, res) => {
   const { userId, age, gender, weight, height, healthIssues, physicsLevel } =
     req.body;
 
@@ -59,7 +60,7 @@ router.post("/add", (req, res) => {
   });
 });
 
-router.put("/update/:userId", (req, res) => {
+router.put("/update/:userId", verifyToken, (req, res) => {
   const userId = req.params.userId;
   const { age, gender, weight, height, healthIssues, physicsLevel } = req.body;
 
