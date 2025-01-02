@@ -1,7 +1,11 @@
 import { NavLink, Outlet } from "react-router";
 import { Footer, Header, Main } from "../components/styled/styledLayouts";
 import { useContext, useEffect, useState } from "react";
-import { HamburgerMenu, NavMenu } from "../components/styled/styledMenu";
+import {
+  HamburgerMenu,
+  NavMenu,
+  NavMenuLoggedIn,
+} from "../components/styled/styledMenu";
 import { motion } from "framer-motion";
 import { UserContext } from "../context/UserContext";
 import { ActionType } from "../reducers/userReducer";
@@ -127,7 +131,7 @@ export const Layout = () => {
         )}
 
         {state.isAuthenticated && (
-          <NavMenu open={open} background="D9D9D9" size="1.8">
+          <NavMenuLoggedIn background="D9D9D9" size="1.2">
             <ul>
               <li>
                 <NavLink to="/profile">
@@ -148,14 +152,15 @@ export const Layout = () => {
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
               </li>
             </ul>
-          </NavMenu>
+          </NavMenuLoggedIn>
         )}
-
-        <HamburgerMenu open={open} onClick={handleClick}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </HamburgerMenu>
+        {!state.isAuthenticated && (
+          <HamburgerMenu open={open} onClick={handleClick}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </HamburgerMenu>
+        )}
       </Header>
 
       <Main>

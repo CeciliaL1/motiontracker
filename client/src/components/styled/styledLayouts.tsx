@@ -15,6 +15,10 @@ export const Header = styled.header`
     height: 85px;
     width: 85px;
   }
+
+  @media screen and (max-width: 801px) {
+    gap: 5px;
+  }
 `;
 
 export const Footer = styled.footer`

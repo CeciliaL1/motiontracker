@@ -1,7 +1,7 @@
 import { css, styled } from "styled-components";
 
 interface IMenyProps {
-  open: boolean;
+  open?: boolean;
   background?: string;
   size?: string;
 }
@@ -74,6 +74,36 @@ export const NavMenu = styled.nav<IMenyProps>`
         `
       : ""}
 `;
+
+export const NavMenuLoggedIn = styled.nav<IMenyProps>`
+  margin-top: 22px;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+
+    list-style: none;
+  }
+  li {
+    margin: 5px;
+    margin-left: 20px;
+    font-size: 1.2rem;
+    font-family: "Raleway", serif;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  li i {
+    padding: 7px;
+    border-radius: 50%;
+    background-color: #${(props) => props.background};
+    font-size: ${(props) => props.size}rem;
+  }
+`;
+
 export const HamburgerMenu = styled.div<IMenyProps>`
   display: none;
   @media screen and (max-width: 800px) {
