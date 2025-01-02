@@ -9,6 +9,7 @@ import { Calendar } from "./views/Calendar";
 import { Start } from "./views/Start";
 import { HowToUse } from "./views/HowToUse";
 import { ForgotPassword } from "./views/ForgotPassword";
+import { ProtectedRoute } from "./components/ProtectedRoutes";
 
 export const Router = createBrowserRouter([
   {
@@ -34,15 +35,23 @@ export const Router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile></Profile>,
+        element: (
+          <ProtectedRoute element={<Profile></Profile>}></ProtectedRoute>
+        ),
       },
       {
         path: "/workout",
-        element: <GenerateWorkout></GenerateWorkout>,
+        element: (
+          <ProtectedRoute
+            element={<GenerateWorkout></GenerateWorkout>}
+          ></ProtectedRoute>
+        ),
       },
       {
         path: "/calendar",
-        element: <Calendar></Calendar>,
+        element: (
+          <ProtectedRoute element={<Calendar></Calendar>}></ProtectedRoute>
+        ),
       },
       {
         path: "/forgotpassword",

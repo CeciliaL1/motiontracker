@@ -20,6 +20,8 @@ export const Layout = () => {
   };
   const handleLogOut = () => {
     dispatch({ type: ActionType.LOGOUT, payload: null });
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
   return (
     <>
@@ -151,6 +153,7 @@ export const Layout = () => {
       <Main>
         <Outlet></Outlet>
       </Main>
+
       <Footer>
         <section>
           <h2>MotionTracker</h2>

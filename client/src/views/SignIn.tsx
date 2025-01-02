@@ -13,9 +13,11 @@ import { setLocalStorage } from "../helperfuntions/setLocalStorage";
 import { ILoggedIn, ILoginUser } from "../models/IUsers";
 import { ActionType } from "../reducers/userReducer";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router";
 
 export const SignIn = () => {
-  const { dispatch } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(UserContext);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -50,6 +52,7 @@ export const SignIn = () => {
       setLocalStorage("token", response.token);
 
       dispatch({ type: ActionType.LOGIN, payload: response.user });
+      navigate("/profile");
     } catch (error) {
       console.error("Error logging in:", error);
       setErrorMessage("Something went wrong. Please try again.");
