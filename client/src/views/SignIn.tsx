@@ -17,7 +17,7 @@ import { useNavigate } from "react-router";
 
 export const SignIn = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -52,7 +52,7 @@ export const SignIn = () => {
       setLocalStorage("token", response.token);
 
       dispatch({ type: ActionType.LOGIN, payload: response.user });
-      navigate("/profile");
+      navigate("/calendar");
     } catch (error) {
       console.error("Error logging in:", error);
       setErrorMessage("Something went wrong. Please try again.");

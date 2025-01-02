@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     const checkUser = async () => {
       const localStorageUser = await getLocalStorage<IUserLogin>("user");
-      console.log(localStorageUser);
 
       if (Object.keys(localStorageUser).length > 0) {
         dispatch({ type: ActionType.LOGIN, payload: localStorageUser });

@@ -1,14 +1,22 @@
 import { NavLink, Outlet } from "react-router";
 import { Footer, Header, Main } from "../components/styled/styledLayouts";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HamburgerMenu, NavMenu } from "../components/styled/styledMenu";
 import { motion } from "framer-motion";
 import { UserContext } from "../context/UserContext";
 import { ActionType } from "../reducers/userReducer";
+import { useNavigate } from "react-router";
 
 export const Layout = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useContext(UserContext);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (state.isAuthenticated) {
+      navigate("/calendar", { replace: true });
+    }
+  }, [state.isAuthenticated, navigate]);
 
   const handleClick = () => {
     setOpen(!open);
