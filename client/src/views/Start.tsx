@@ -5,7 +5,7 @@ import { ImageWrapper, LinkWrap, Wrapper } from "../components/styled/Wrappers";
 export const Start = () => {
   return (
     <>
-      <Wrapper direction="row" margintop={15}>
+      <Wrapper direction="row" margintop={15} gap={20}>
         <LongText>
           <Heading1 margintop={30} marginbottom={50} marginleft={40}>
             Welcome to MotionTracker
