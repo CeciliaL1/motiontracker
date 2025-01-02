@@ -1,4 +1,8 @@
-export const getLocalStorage = async <T>(stored: string): Promise<T> => {
-    const storedObject = await JSON.parse(localStorage.getItem(`${stored}`) || '[]');
-    return storedObject
+export const getLocalStorage =  <T>(stored: string)=> {
+
+    const storedObject =  JSON.parse(localStorage.getItem(`${stored}`) || '[]');
+    if(!storedObject) {
+        return {} as T;
+    }
+    return storedObject as T;
 }

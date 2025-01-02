@@ -14,16 +14,13 @@ function App() {
   });
 
   useEffect(() => {
-    const checkUser = async () => {
-      const localStorageUser = await getLocalStorage<IUserLogin>("user");
+    const localStorageUser = getLocalStorage<IUserLogin>("user");
 
-      if (Object.keys(localStorageUser).length > 0) {
-        dispatch({ type: ActionType.LOGIN, payload: localStorageUser });
-      } else {
-        dispatch({ type: ActionType.LOGOUT, payload: null });
-      }
-    };
-    checkUser();
+    if (Object.keys(localStorageUser).length > 0) {
+      dispatch({ type: ActionType.LOGIN, payload: localStorageUser });
+    } else {
+      dispatch({ type: ActionType.LOGOUT, payload: null });
+    }
   }, []);
 
   return (

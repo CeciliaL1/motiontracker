@@ -1,8 +1,10 @@
 import axios from "axios";
 
 
-export const getData = async <T>(url:string): Promise<T> => {
-    const response = await axios.get<T>(url)
+
+export const getData = async <T>(url:string, headers: Record<string, string>): Promise<T> => {
+    const response = await axios.get<T>(url, {headers:headers})
+ 
     return response.data
 }
 
