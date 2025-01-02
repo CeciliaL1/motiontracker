@@ -100,58 +100,63 @@ export const SignUp = () => {
           <Heading2 marginbottom={20}>Sign up</Heading2>
 
           <FirstName
+            aria-label="First Name"
             value={firstName}
             onChange={(e) => {
               handleChange("firstName", e.target.value);
             }}
           ></FirstName>
           {errors.firstName && (
-            <ErrorMessage>
+            <ErrorMessage aria-live="assertive">
               <p>{errors.firstName}</p>
             </ErrorMessage>
           )}
 
           <LastName
+            aria-label="Last Name"
             value={lastName}
             onChange={(e) => {
               handleChange("lastName", e.target.value);
             }}
           ></LastName>
           {errors.lastName && (
-            <ErrorMessage>
+            <ErrorMessage aria-live="assertive">
               <p>{errors.lastName}</p>
             </ErrorMessage>
           )}
           <Email
+            aria-label="Email address"
             value={userEmail}
             onChange={(e) => {
               handleChange("email", e.target.value);
             }}
           ></Email>
           {errors.email && (
-            <ErrorMessage>
+            <ErrorMessage aria-live="assertive">
               <p>{errors.email}</p>
             </ErrorMessage>
           )}
           <Name
+            aria-label="User Name"
             value={userName}
             onChange={(e) => {
               handleChange("userName", e.target.value);
             }}
           ></Name>
           {errors.userName && (
-            <ErrorMessage>
+            <ErrorMessage aria-live="assertive">
               <p>{errors.userName}</p>
             </ErrorMessage>
           )}
           <Password
+            aria-label="Password"
             value={userPassword}
             onChange={(e) => {
               handleChange("password", e.target.value);
             }}
           ></Password>
           {errors.password && (
-            <ErrorMessage>
+            <ErrorMessage aria-live="assertive">
               <p>{errors.password}</p>
             </ErrorMessage>
           )}

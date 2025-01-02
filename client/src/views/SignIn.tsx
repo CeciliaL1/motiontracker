@@ -66,12 +66,13 @@ export const SignIn = () => {
           <Heading2 marginbottom={20}>Sign in</Heading2>
           {isError && (
             <>
-              <div>
+              <div aria-live="assertive">
                 <p>{errorMessage}</p>
               </div>
             </>
           )}
           <Email
+            aria-label="Email address"
             value={userEmail}
             onChange={(e) => {
               setUserEmail(e.target.value);
@@ -79,6 +80,7 @@ export const SignIn = () => {
             onClick={handleInputClick}
           ></Email>
           <Password
+            aria-label="Password"
             value={userPassword}
             onChange={(e) => {
               setUserPassword(e.target.value);
@@ -91,9 +93,12 @@ export const SignIn = () => {
             fontsize={0.9}
             fontweight={500}
           >
-            <Link to="/forgotpassword">Forgot password?</Link>
+            <Link aria-label="Forgot password" to="/forgotpassword">
+              Forgot password?
+            </Link>
           </LinkWrap>
           <PrimaryButton
+            aria-label="Sign in Button"
             margintop={50}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               handleSignIn(e);
@@ -101,7 +106,7 @@ export const SignIn = () => {
           >
             Sign in
           </PrimaryButton>
-          <Link to="/signup">
+          <Link aria-label="go to sign up" to="/signup">
             <SecondaryButton margintop={15}>Sign up</SecondaryButton>
           </Link>
         </Form>

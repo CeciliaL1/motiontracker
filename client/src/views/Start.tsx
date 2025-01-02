@@ -23,7 +23,7 @@ export const Start = () => {
             width={350}
             margin={10}
             src="public/image-front-page-motiontracker.webp"
-            alt=""
+            alt="An AI generated image that illustrate a screen with different workout options and around it are people who are working out."
           />
           <LinkWrap
             margintop={5}

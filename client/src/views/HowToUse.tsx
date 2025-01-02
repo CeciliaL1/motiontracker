@@ -23,7 +23,7 @@ export const HowToUse = () => {
             width={350}
             margin={10}
             src="public/how-to-use-motiontracker.webp"
-            alt=""
+            alt="An AI generated image that illustrate a screen with a woman explaning how to use the app."
           />
           <LinkWrap
             margintop={5}
