@@ -5,24 +5,24 @@ export interface IInitialState  {
     isAuthenticated: boolean;
     user: IUserLogin | null
   };
-  export interface IAction {
-    type: ActionType; 
+  export interface IUserAction {
+    type: ActionUserType; 
     payload: IUserLogin | null;
 };
-export enum ActionType {
+export enum ActionUserType {
     LOGIN,
     LOGOUT
 }
   
-  export const UserReducer = (state: IInitialState, action: IAction) => {
+  export const UserReducer = (state: IInitialState, action: IUserAction) => {
     switch (action.type) {
-      case ActionType.LOGIN:
+      case ActionUserType.LOGIN:
         return {
           ...state,
           isAuthenticated: true,
           user: action.payload, 
         };
-      case ActionType.LOGOUT:
+      case ActionUserType.LOGOUT:
         return {
           ...state,
           isAuthenticated: false,

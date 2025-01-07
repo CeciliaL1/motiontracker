@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
-import { IAction, IInitialState } from "../reducers/userReducer";
+import { IUserAction, IInitialState } from "../reducers/userReducer";
 
 interface IUserContext {
     state: IInitialState;
-    dispatch: React.Dispatch<IAction>
+    dispatch: React.Dispatch<IUserAction>
 }
 
 export const UserContext = createContext<IUserContext>({state: {isAuthenticated: false, user: null},

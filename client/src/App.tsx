@@ -4,7 +4,7 @@ import { Router } from "./Router";
 import { useReducer, useEffect } from "react";
 import { getLocalStorage } from "./helperfuntions/getLocalStorage";
 import { IUserLogin } from "./models/IUsers";
-import { UserReducer, ActionType } from "./reducers/userReducer";
+import { UserReducer, ActionUserType } from "./reducers/userReducer";
 import { UserContext } from "./context/UserContext";
 
 function App() {
@@ -17,9 +17,9 @@ function App() {
     const localStorageUser = getLocalStorage<IUserLogin>("user");
 
     if (Object.keys(localStorageUser).length > 0) {
-      dispatch({ type: ActionType.LOGIN, payload: localStorageUser });
+      dispatch({ type: ActionUserType.LOGIN, payload: localStorageUser });
     } else {
-      dispatch({ type: ActionType.LOGOUT, payload: null });
+      dispatch({ type: ActionUserType.LOGOUT, payload: null });
     }
   }, []);
 

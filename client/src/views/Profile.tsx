@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
 import { IUserProfile } from "../models/IUserProfile";
 import { IUserLogin } from "../models/IUsers";
 import { getData } from "../services/serviceBase";
 import { UserProfile } from "../components/UserProfile";
+import { ProfileContext } from "../context/ProfileContext";
+import { ProfileReducer } from "../reducers/profileReducer";
 
 export const Profile = () => {
+  const [state, dispatch] = useReducer(ProfileReducer, false);
   const inloggedProfile = getLocalStorage<IUserLogin>("user");
   const { userId } = inloggedProfile;
   const token = getLocalStorage<string>("token");
@@ -40,10 +43,12 @@ export const Profile = () => {
 
   return (
     <>
-      <UserProfile
-        userProfile={userData}
-        loggedInUser={inloggedProfile}
-      ></UserProfile>
+      <ProfileContext.Provider value={{ state, dispatch }}>
+        <UserProfile
+          userProfile={userData}
+          loggedInUser={inloggedProfile}
+        ></UserProfile>
+      </ProfileContext.Provider>
     </>
   );
 };

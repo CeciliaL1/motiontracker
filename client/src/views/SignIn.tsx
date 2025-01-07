@@ -11,7 +11,7 @@ import { useContext, useState } from "react";
 import { postData } from "../services/serviceBase";
 import { setLocalStorage } from "../helperfuntions/setLocalStorage";
 import { ILoggedIn, ILoginUser } from "../models/IUsers";
-import { ActionType } from "../reducers/userReducer";
+import { ActionUserType } from "../reducers/userReducer";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router";
 
@@ -51,7 +51,7 @@ export const SignIn = () => {
       setLocalStorage("user", response.user);
       setLocalStorage("token", response.token);
 
-      dispatch({ type: ActionType.LOGIN, payload: response.user });
+      dispatch({ type: ActionUserType.LOGIN, payload: response.user });
       navigate("/calendar");
     } catch (error) {
       console.error("Error logging in:", error);
