@@ -29,6 +29,12 @@ export const Name = styled.input.attrs({
   }
 `;
 
+export const TextInput = styled(Name).attrs((props) => ({
+  type: "text",
+  placeholder: props.placeholder || "Type text here",
+  name: props.name,
+}))``;
+
 export const Password = styled(Name).attrs({
   type: "password",
   name: "password",

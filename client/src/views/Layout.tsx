@@ -8,7 +8,7 @@ import {
 } from "../components/styled/styledMenu";
 import { motion } from "framer-motion";
 import { UserContext } from "../context/UserContext";
-import { ActionType } from "../reducers/userReducer";
+import { ActionUserType } from "../reducers/userReducer";
 import { useNavigate } from "react-router";
 
 export const Layout = () => {
@@ -31,7 +31,7 @@ export const Layout = () => {
     }
   };
   const handleLogOut = () => {
-    dispatch({ type: ActionType.LOGOUT, payload: null });
+    dispatch({ type: ActionUserType.LOGOUT, payload: null });
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };

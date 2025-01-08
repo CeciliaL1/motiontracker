@@ -10,6 +10,9 @@ interface IWrapperProps {
   margintop: number;
   marginleft?: number;
   gap?: number;
+  backgroundColor?: string;
+  padding?: number;
+  width?: number;
 }
 
 interface ILinkWrapperProps {
@@ -27,6 +30,9 @@ export const Wrapper = styled.div<IWrapperProps>`
   flex-wrap: wrap;
   justify-content: center;
   gap: ${(props) => props.gap}px;
+  background-color: #${(props) => props.backgroundColor};
+  padding: ${(props) => props.padding}px;
+  width: ${(props) => props.width}px;
 `;
 
 export const ImageWrapper = styled.img<IImageWrapperProps>`
