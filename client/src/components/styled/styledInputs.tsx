@@ -29,11 +29,26 @@ export const Name = styled.input.attrs({
   }
 `;
 
-export const TextInput = styled(Name).attrs((props) => ({
+export const TextInput = styled.input.attrs((props) => ({
   type: "text",
   placeholder: props.placeholder || "Type text here",
   name: props.name,
-}))``;
+  value: props.value,
+  onChange: props.onChange,
+}))`
+  font-family: "roboto";
+  background-color: #f2f1eb;
+  width: 350px;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  margin: 10px;
+
+  &:hover {
+    background-color: #eee7da;
+  }
+`;
 
 export const Password = styled(Name).attrs({
   type: "password",

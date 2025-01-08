@@ -40,7 +40,7 @@ export const UserProfile = ({
       setDiagnos(user.healthIssues);
       setPhysicsLevel(user.physicsLevel);
     });
-  });
+  }, [userProfile]);
 
   type StringFields =
     | "firstName"
@@ -53,9 +53,30 @@ export const UserProfile = ({
 
   const handleFieldChange = (
     field: StringFields | NumberFields,
-    value: string | number
+    value: string
   ) => {
-    if (typeof value === "string") {
+    if (
+      field === "age" ||
+      field === "weight" ||
+      field === "height" ||
+      field === "physicsLevel"
+    ) {
+      const numericValue = Number(value); // Konvertera till nummer
+      switch (field) {
+        case "age":
+          setAge(numericValue);
+          break;
+        case "weight":
+          setWeight(numericValue);
+          break;
+        case "height":
+          setHeight(numericValue);
+          break;
+        case "physicsLevel":
+          setPhysicsLevel(numericValue);
+          break;
+      }
+    } else {
       switch (field) {
         case "firstName":
           setFirstName(value);
@@ -74,21 +95,6 @@ export const UserProfile = ({
           break;
         case "diagnos":
           setDiagnos(value);
-          break;
-      }
-    } else if (typeof value === "number") {
-      switch (field) {
-        case "age":
-          setAge(value);
-          break;
-        case "weight":
-          setWeight(value);
-          break;
-        case "height":
-          setHeight(value);
-          break;
-        case "physicsLevel":
-          setPhysicsLevel(value);
           break;
       }
     }
@@ -211,39 +217,40 @@ export const UserProfile = ({
                 <TextInput
                   placeholder="Age"
                   name="Age"
-                  value={age != 0 ? age : "Age"}
-                  onChange={(e) => handleFieldChange("age", e.target.value)}
+                  value={age !== 0 ? age : ""}
+                  onChange={(e) => {
+                    console.log("ändras");
+                    handleFieldChange("age", e.target.value);
+                  }}
                 ></TextInput>
                 <TextInput
                   placeholder="Gender"
                   name="Gender"
-                  value={gender != "" ? gender : "Gender"}
+                  value={gender !== "" ? gender : ""}
                   onChange={(e) => handleFieldChange("gender", e.target.value)}
                 ></TextInput>
                 <TextInput
-                  placeholder="Weight"
+                  placeholder="Weight in kg"
                   name="Weight"
-                  value={weight != 0 ? weight : "Weight in kg"}
+                  value={weight !== 0 ? weight : ""}
                   onChange={(e) => handleFieldChange("weight", e.target.value)}
                 ></TextInput>
                 <TextInput
-                  placeholder="Height"
+                  placeholder="Height in cm "
                   name="Height"
-                  value={height != 0 ? height : "Height in cm"}
+                  value={height !== 0 ? height : ""}
                   onChange={(e) => handleFieldChange("height", e.target.value)}
                 ></TextInput>
                 <TextInput
                   placeholder="Diagnos"
                   name="Diagnos"
-                  value={diagnos != "" ? diagnos : "Diagnos"}
+                  value={diagnos !== "" ? diagnos : ""}
                   onChange={(e) => handleFieldChange("diagnos", e.target.value)}
                 ></TextInput>
                 <TextInput
-                  placeholder="Physics level"
+                  placeholder="Physics level, 1-10"
                   name="PhysicsLevel"
-                  value={
-                    physicsLevel != 0 ? physicsLevel : "Physics level 1-10"
-                  }
+                  value={physicsLevel !== 0 ? physicsLevel : ""}
                   onChange={(e) =>
                     handleFieldChange("physicsLevel", e.target.value)
                   }
