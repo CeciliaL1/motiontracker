@@ -126,18 +126,14 @@ router.post("/login", (req, res) => {
 
 router.put("/update/:userId", (req, res) => {
   const userId = req.params.userId;
-  const { password } = req.body;
+  const { firstName, lastName, email } = req.body;
 
-  const cryptoPassWord = cryptoJS
-    .HmacSHA256(password, process.env.SALT_KEY)
-    .toString();
-
-  const sql = `UPDATE users SET password = ? WHERE userId = ?`;
-  const values = [cryptoPassWord, userId];
+  const sql = `UPDATE users SET firstName = ? lastName = ? email = ?WHERE userId = ?`;
+  const values = [firstName, lastName, email, userId];
 
   connection.query(sql, values, (err, result) => {
     if (err) {
-      console.error("Error updating user password:", err);
+      console.error("Error updating user:", err);
       res.status(500).json({ error: "Database error" });
       return;
     }
@@ -145,7 +141,7 @@ router.put("/update/:userId", (req, res) => {
       res.status(404).json({ message: "User not found" });
     }
 
-    res.json({ message: "Password uppdated successfully" });
+    res.json({ message: "Information uppdated successfully" });
   });
 });
 
