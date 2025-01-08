@@ -15,7 +15,7 @@ export const postData = async <TData, TResponse>(url: string, data: TData, heade
 
 }
 
-export const putData = async <T>(url:string, data: T, headers: object): Promise<T> => {
-    const response = await axios.put<T>(url, data, {headers : headers});
+export const putData = async <TData, TResponse>(url:string, data: TData, headers: object): Promise<TResponse> => {
+    const response = await axios.put<TResponse>(url, data, {headers : headers});
     return response.data;
 }

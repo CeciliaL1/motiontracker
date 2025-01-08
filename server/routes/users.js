@@ -6,6 +6,7 @@ require("dotenv").config();
 const { randomUUID } = require("crypto");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../middleware/verifyToken");
 
 const generateRefreshToken = () => {
   return crypto.randomBytes(64).toString("hex");
@@ -124,11 +125,11 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.put("/update/:userId", (req, res) => {
+router.put("/update/:userId", verifyToken, (req, res) => {
   const userId = req.params.userId;
   const { firstName, lastName, email } = req.body;
 
-  const sql = `UPDATE users SET firstName = ? lastName = ? email = ?WHERE userId = ?`;
+  const sql = `UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE userId = ?`;
   const values = [firstName, lastName, email, userId];
 
   connection.query(sql, values, (err, result) => {

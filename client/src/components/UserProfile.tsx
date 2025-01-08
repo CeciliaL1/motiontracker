@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { IUserProfile } from "../models/IUserProfile";
+import { IResponse, IUserProfile } from "../models/IUserProfile";
 import { IUserLogin } from "../models/IUsers";
 import { Wrapper } from "./styled/Wrappers";
 import { ProfileContext } from "../context/ProfileContext";
@@ -7,6 +7,8 @@ import { PrimaryButton } from "./styled/styledButtons";
 import { ActionProfileType } from "../reducers/profileReducer";
 import { Email, Name, TextInput } from "./styled/styledInputs";
 import { Heading2 } from "./styled/styledTextContent";
+import { putData } from "../services/serviceBase";
+import { getLocalStorage } from "../helperfuntions/getLocalStorage";
 
 interface IUserProfileProps {
   userProfile: IUserProfile[];
@@ -18,9 +20,10 @@ export const UserProfile = ({
   loggedInUser,
 }: IUserProfileProps) => {
   const { state, dispatch } = useContext(ProfileContext);
+  const [message, setMessage] = useState("");
 
   const [firstName, setFirstName] = useState(loggedInUser.firstName);
-  const [lastname, setLastName] = useState(loggedInUser.lastName);
+  const [lastName, setLastName] = useState(loggedInUser.lastName);
   const [userName, setUserName] = useState(loggedInUser.userName);
   const [email, setEmail] = useState(loggedInUser.email);
 
@@ -103,7 +106,45 @@ export const UserProfile = ({
   const handleEditProfile = () => {
     dispatch({ type: ActionProfileType.TOGGLE, payload: true });
   };
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
+    const userId = loggedInUser.userId;
+    const token = getLocalStorage<string>("token");
+
+    const userSettings = {
+      firstName: firstName,
+      lastName: lastName,
+      userName: userName,
+      email: email,
+    };
+
+    const profileSettings = {
+      age,
+      gender,
+      weight,
+      height,
+      healthIssues: diagnos,
+      physicsLevel,
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    const userRespone = await putData(
+      `http://localhost:3000/api/users/update/${userId}`,
+      userSettings,
+      headers
+    );
+    console.log("user", userRespone);
+
+    const profileRespone = await putData<IUserProfile, IResponse>(
+      `http://localhost:3000/api/profile/update/${userId}`,
+      profileSettings,
+      headers
+    );
+    setMessage(profileRespone.message);
+
     dispatch({ type: ActionProfileType.TOGGLE, payload: false });
   };
   return (
@@ -123,7 +164,7 @@ export const UserProfile = ({
               <p>
                 Name:{" "}
                 <span>
-                  {firstName} {lastname}
+                  {firstName} {lastName}
                 </span>
               </p>
               <p>
@@ -167,6 +208,7 @@ export const UserProfile = ({
             </Wrapper>
           </Wrapper>
           <Wrapper direction="row" margintop={6} gap={10}>
+            {message === "" ? "" : message}
             <PrimaryButton onClick={handleEditProfile}>
               Edit Profile
             </PrimaryButton>
@@ -190,7 +232,7 @@ export const UserProfile = ({
                 onChange={(e) => handleFieldChange("firstName", e.target.value)}
               ></Name>
               <Name
-                value={lastname}
+                value={lastName}
                 onChange={(e) => handleFieldChange("lastName", e.target.value)}
               ></Name>
               <Name
