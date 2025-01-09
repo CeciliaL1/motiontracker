@@ -18,6 +18,47 @@ export const GenerateWorkout = () => {
     "": { task: "", repetition: 0, done: false },
   });
 
+  const mockWorkoutSchedule = {
+    "9/1": { task: "Chair Stands", repetition: 5, done: false },
+    "9/2": { task: "Seated Arm Raises", repetition: 10, done: false },
+    "9/3": { task: "Toe Taps (seated)", repetition: 10, done: false },
+    "9/4": { task: "Wall Push-ups", repetition: 5, done: false },
+    "9/5": { task: "Gentle Stretches", repetition: "5 min", done: false },
+    "9/6": { task: "Seated Side Leg Lifts", repetition: 10, done: false },
+    "9/7": { task: "Heel Raises", repetition: 10, done: false },
+    "9/8": { task: "Seated Tricep Dips", repetition: 8, done: false },
+    "9/9": { task: "Ankle Pumps", repetition: 10, done: false },
+    "9/10": { task: "Seated Marching", repetition: "3 min", done: false },
+    "9/11": { task: "Arm Circles (seated)", repetition: 10, done: false },
+    "9/12": { task: "Wall Sit", repetition: "30 sec", done: false },
+    "9/13": {
+      task: "Cross-Body Arm Stretch",
+      repetition: "5 min",
+      done: false,
+    },
+    "9/14": { task: "Knee Lifts (seated)", repetition: 10, done: false },
+    "9/15": { task: "Side Leg Extensions", repetition: 10, done: false },
+    "9/16": { task: "Wrist Rotations", repetition: 10, done: false },
+    "9/17": { task: "Chair Push-ups", repetition: 5, done: false },
+    "9/18": { task: "Seated Leg Tucks", repetition: 10, done: false },
+    "9/19": { task: "Cat-Cow Stretch (seated)", repetition: 5, done: false },
+    "9/20": { task: "Seated Side Bends", repetition: 10, done: false },
+    "9/21": { task: "Standing Calf Raises", repetition: 10, done: false },
+    "9/22": { task: "Gentle Neck Rolls", repetition: "5 min", done: false },
+    "9/23": { task: "Seated Bicycle Crunches", repetition: 10, done: false },
+    "9/24": { task: "Seated Arm Twists", repetition: 10, done: false },
+    "9/25": { task: "Seated Forward Bend", repetition: "5 min", done: false },
+    "9/26": { task: "Standing Side Leg Raises", repetition: 10, done: false },
+    "9/27": {
+      task: "Forearm Plank (knees down)",
+      repetition: "15 sec",
+      done: false,
+    },
+    "9/28": { task: "Gentle Back Stretch", repetition: "5 min", done: false },
+    "9/29": { task: "Seated Toe Touch", repetition: 10, done: false },
+    "9/30": { task: "Standing Arm Raises", repetition: 10, done: false },
+  };
+
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState("");
   const [weight, setWeight] = useState(0);
@@ -25,6 +66,7 @@ export const GenerateWorkout = () => {
   const [diagnos, setDiagnos] = useState("");
   const [physicsLevel, setPhysicsLevel] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -55,6 +97,7 @@ export const GenerateWorkout = () => {
 
     const today = `${day}/${month}`;
 
+    setIsLoading(true);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -106,14 +149,13 @@ export const GenerateWorkout = () => {
     );
 
     const responseContent = response.choices[0].message.content;
-    console.log(responseContent);
     const parsedContent = parsedWorkoutContent(responseContent);
-    console.log(parsedContent);
     setSchedule(parsedContent);
+    setIsLoading(false);
   };
   return (
     <>
-      <Wrapper direction="row" margintop={13} marginleft={0}>
+      <Wrapper direction="row" margintop={13}>
         <GenerateButton
           onClick={() => {
             generateWorkout();
@@ -123,7 +165,10 @@ export const GenerateWorkout = () => {
         </GenerateButton>
       </Wrapper>
 
-      <PrewviewWorkout schedule={schedule}></PrewviewWorkout>
+      <PrewviewWorkout
+        schedule={mockWorkoutSchedule}
+        isLoading={isLoading}
+      ></PrewviewWorkout>
     </>
   );
 };

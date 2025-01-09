@@ -42,7 +42,7 @@ export const SecondaryButton = styled(PrimaryButton)`
 
 export const GenerateButton = styled.button`
   height: 90px;
-  width: 250px;
+  width: 300px;
   border-radius: 30%;
   background-color: #88ab8e;
   font-family: "Raleway", serif;

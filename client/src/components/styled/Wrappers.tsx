@@ -29,6 +29,8 @@ export const Wrapper = styled.div<IWrapperProps>`
   margin-left: ${(props) => props.marginleft}%;
   flex-wrap: wrap;
   justify-content: center;
+  justify-items: center;
+  align-items: center;
   gap: ${(props) => props.gap}px;
   background-color: #${(props) => props.backgroundColor};
   padding: ${(props) => props.padding}px;
