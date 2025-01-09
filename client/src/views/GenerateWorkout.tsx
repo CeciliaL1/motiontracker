@@ -166,7 +166,7 @@ export const GenerateWorkout = () => {
       </Wrapper>
 
       <PrewviewWorkout
-        schedule={mockWorkoutSchedule}
+        schedule={schedule}
         isLoading={isLoading}
       ></PrewviewWorkout>
     </>

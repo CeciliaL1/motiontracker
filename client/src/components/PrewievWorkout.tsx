@@ -1,4 +1,5 @@
 import { IWorkoutScheduele } from "../models/IWorkout";
+import { Spinner } from "./Spinner";
 import { PrimaryButton } from "./styled/styledButtons";
 import { Heading2 } from "./styled/styledTextContent";
 import { Ul } from "./styled/styledUl";
@@ -18,7 +19,7 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
     <>
       <Wrapper direction="column" margintop={10}>
         {isLoading ? (
-          <p>Loading...</p>
+          <Spinner></Spinner>
         ) : schedueleLength === 1 ? (
           <Heading2>No workout to display</Heading2>
         ) : (
