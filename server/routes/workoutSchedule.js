@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const verifyToken = require("../middleware/verifyToken");
+const axios = require("axios");
 
 router.use(cors());
 
@@ -46,6 +47,29 @@ router.post("/create", verifyToken, (req, res) => {
       res.status(201).json(result);
     });
   });
+});
+
+router.post("/generate-workout", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-4o-mini",
+        messages: req.body.messages,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Response from OpenAI:", response.data);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 });
 
 router.put("/update/:userId", verifyToken, (req, res) => {
