@@ -32,7 +32,7 @@ export const Profile = () => {
 
     const getUserData = async () => {
       const response = await getData<IUserProfile[]>(
-        `http://localhost:3000/api/profile/${userId}`,
+        `https://cecilial.hemsida.eu/api/profile/${userId}`,
         headers
       );
 

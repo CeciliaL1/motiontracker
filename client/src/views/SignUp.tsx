@@ -86,7 +86,7 @@ export const SignUp = () => {
     };
 
     const response = await postData<IUserSignUp, IUserLogin>(
-      "http://localhost:3000/api/users/add",
+      "https://cecilial.hemsida.eu/api/users/add",
       userData,
       headers
     );

@@ -39,7 +39,7 @@ export const SignIn = () => {
 
     try {
       const response = await postData<ILoginUser, ILoggedIn>(
-        "http://localhost:3000/api/users/login",
+        "https://cecilial.hemsida.eu/api/users/login",
         userData,
         headers
       );
@@ -48,6 +48,8 @@ export const SignIn = () => {
         setIsError(true);
       }
 
+      console.log("Saving user:", JSON.stringify(response.user));
+      console.log("Saving token:", JSON.stringify(response.token));
       setLocalStorage("user", response.user);
       setLocalStorage("token", response.token);
 
