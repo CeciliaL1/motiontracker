@@ -14,3 +14,8 @@ export interface IWeekWorkout {
     repetition: string | number; // Repetition kan vara ett nummer eller en sträng (t.ex. "5 min")
     done: boolean;
   }
+
+  export interface ISaveWorkout {
+    userId: string;
+    workoutDetails: IWorkoutScheduele
+  }

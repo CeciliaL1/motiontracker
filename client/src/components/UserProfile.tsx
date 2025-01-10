@@ -154,7 +154,7 @@ export const UserProfile = ({
           <Wrapper direction="row" margintop={15} gap={50}>
             <Wrapper
               backgroundColor="EEE7DA"
-              padding={30}
+              padding={65}
               direction="column"
               margintop={1}
               gap={5}

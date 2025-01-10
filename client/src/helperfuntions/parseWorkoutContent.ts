@@ -4,12 +4,12 @@ export const parsedWorkoutContent = (content: string) => {
     const workoutSchedule: IWorkoutScheduele = {};
 
     const workoutLines = content.split('\n');
-    console.log("Workout Lines:", workoutLines); 
+   
 
     let currentDate = '';
 
-    workoutLines.forEach((line, index) => {
-        console.log(`Line ${index + 1}:`, line);  
+    workoutLines.forEach((line) => {
+       
 
         
         const dateMatch = line.match(/Date:\s*(\d{1,2}\/\d{1,2})\*\*/);
@@ -29,6 +29,6 @@ export const parsedWorkoutContent = (content: string) => {
         }
     });
 
-    console.log("Parsed Workout Schedule:", workoutSchedule);  
+
     return workoutSchedule;
 };

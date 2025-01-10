@@ -1,4 +1,7 @@
-import { IWorkoutScheduele } from "../models/IWorkout";
+import { getLocalStorage } from "../helperfuntions/getLocalStorage";
+import { IUserLogin } from "../models/IUsers";
+import { ISaveWorkout, IWorkoutScheduele } from "../models/IWorkout";
+import { postData } from "../services/serviceBase";
 import { Spinner } from "./Spinner";
 import { PrimaryButton } from "./styled/styledButtons";
 import { Heading2 } from "./styled/styledTextContent";
@@ -13,8 +16,29 @@ interface IPreviewProps {
 
 export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
   const schedueleLength = Object.keys(schedule).length;
+  const loggedInUser = getLocalStorage<IUserLogin>("user");
+  const token = getLocalStorage<string>("token");
 
-  const handleSaveWorkout = () => {};
+  const data = {
+    workoutDetails: schedule,
+    userId: loggedInUser.userId,
+  };
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  const handleSaveWorkout = async () => {
+    const response = await postData<ISaveWorkout, IWorkoutScheduele>(
+      "http://localhost:3000/api/workout/create",
+      data,
+      headers
+    );
+
+    console.log(response);
+  };
+
   return (
     <>
       <Wrapper direction="column" margintop={10}>

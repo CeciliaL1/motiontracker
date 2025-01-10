@@ -95,9 +95,8 @@ export const GenerateWorkout = () => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    const today = `${day}/${month}`;
-
     setIsLoading(true);
+
     const headers = {
       "Content-Type": "application/json",
     };
@@ -113,24 +112,17 @@ export const GenerateWorkout = () => {
         Date: (day/month)**
            Workout: { task: "(task name)", repetition: (number or "time in minutes"), done: false }
 
-      Example format for Week 1:
-      Date: 9/1**
+  
+      Date: ${day}/${month}**
         Workout: {task: "Chair Stands", repetition: 5, done: false}
-      Date: 9/3**
-       Workout: {task: "Seated Arm Raises", repetition: 10, done: false}
-      Date: 9/5**
-        Workout: {task: "Toe Taps (seated)", repetition: 10, done: false}
-      Date: 9/7**
-        Workout: {task: "Wall Push-ups", repetition: 5, done: false}
-      Date: 9/9**
-         Workout: {task: "Gentle Stretches", repetition: "5 min", done: false}
+
 
       
       Please generate the schedule for 30-days in this exact format, with the following changes each workout: 
       - Change tasks
       - Increment repetitions or time gradually.
       - Keep the format and structure consistent across all weeks.
-      - Starting date is ${today}
+      - Starting day is ${day} and month is ${month}
       
       For each workout, the task name and repetitions should be clearly stated, and each workout should have a "done: false" flag. dont split it into weeks
 
@@ -150,6 +142,7 @@ export const GenerateWorkout = () => {
 
     const responseContent = response.choices[0].message.content;
     const parsedContent = parsedWorkoutContent(responseContent);
+
     setSchedule(parsedContent);
     setIsLoading(false);
   };
@@ -166,7 +159,7 @@ export const GenerateWorkout = () => {
       </Wrapper>
 
       <PrewviewWorkout
-        schedule={schedule}
+        schedule={mockWorkoutSchedule}
         isLoading={isLoading}
       ></PrewviewWorkout>
     </>
