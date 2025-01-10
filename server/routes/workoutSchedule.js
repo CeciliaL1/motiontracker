@@ -27,8 +27,11 @@ router.get("/:userId", verifyToken, (req, res) => {
 router.post("/create", verifyToken, (req, res) => {
   const { userId, workoutDetails } = req.body;
 
-  const sql =
-    "INSERT into workout_schedule (userId, workoutDetails) VALUES ( ?, ? )";
+  const sql = `
+  INSERT INTO workout_schedule (userId, workoutDetails)
+  VALUES (?, ?)
+  ON DUPLICATE KEY UPDATE workoutDetails = VALUES(workoutDetails)
+`;
   const values = [userId, JSON.stringify(workoutDetails)];
 
   connection.query(sql, values, (err, result) => {
