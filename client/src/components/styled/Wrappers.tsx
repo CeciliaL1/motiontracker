@@ -85,3 +85,42 @@ export const NotFoundWrapper = styled.div`
     text-decoration: underline;
   }
 `;
+
+export const CalendarWrapper = styled.div`
+  margin: auto;
+  margin-top: 20px;
+  background-color: #d4f7d4;
+  padding: 10px;
+  border-radius: 3px;
+
+  .react-calendar {
+    width: 1000px;
+    font-family: "Raleway", serif;
+  }
+
+  button {
+    background-color: transparent;
+    border: 0;
+    border: 1px solid #88ab8e;
+    color: black;
+    padding: 5px 5px;
+  }
+  .react-calendar button:hover {
+    background-color: #dbe3db;
+  }
+
+  .completed {
+    background-color: #88ab8e !important;
+    color: black;
+  }
+
+  .not-completed {
+    background-color: white !important;
+    color: black;
+  }
+  .react-calendar button:enabled:hover {
+    background-color: #dbe3db !important;
+    color: black;
+    border: 1px solid;
+  }
+`;

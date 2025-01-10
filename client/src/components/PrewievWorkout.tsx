@@ -23,7 +23,7 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
     workoutDetails: schedule,
     userId: loggedInUser.userId,
   };
-
+  console.log(schedule);
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,

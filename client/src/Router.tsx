@@ -5,7 +5,7 @@ import { SignIn } from "./views/SignIn";
 import { SignUp } from "./views/SignUp";
 import { Profile } from "./views/Profile";
 import { GenerateWorkout } from "./views/GenerateWorkout";
-import { Calendar } from "./views/Calendar";
+import { CalendarView } from "./views/Calendar";
 import { Start } from "./views/Start";
 import { HowToUse } from "./views/HowToUse";
 import { ForgotPassword } from "./views/ForgotPassword";
@@ -50,7 +50,9 @@ export const Router = createBrowserRouter([
       {
         path: "/calendar",
         element: (
-          <ProtectedRoute element={<Calendar></Calendar>}></ProtectedRoute>
+          <ProtectedRoute
+            element={<CalendarView></CalendarView>}
+          ></ProtectedRoute>
         ),
       },
       {

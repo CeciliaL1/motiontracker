@@ -11,7 +11,7 @@ export interface IWorkout {
 export interface IWeekWorkout {
     date: string;
     task: string;
-    repetition: string | number; // Repetition kan vara ett nummer eller en sträng (t.ex. "5 min")
+    repetition: string | number; 
     done: boolean;
   }
 
@@ -19,3 +19,9 @@ export interface IWeekWorkout {
     userId: string;
     workoutDetails: IWorkoutScheduele
   }
+
+
+  export interface IWorkoutDetailsResponse {
+    userId: string;
+    workoutDetails: IWorkoutScheduele
+}
