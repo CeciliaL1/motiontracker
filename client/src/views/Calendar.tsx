@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import {
-  IWorkout,
-  IWorkoutDetailsResponse,
-  IWorkoutScheduele,
-} from "../models/IWorkout";
+import { IWorkout, IWorkoutDetailsResponse } from "../models/IWorkout";
 import { getData } from "../services/serviceBase";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
 import { IUserLogin } from "../models/IUsers";
@@ -15,12 +11,20 @@ import { CalendarWrapper, Wrapper } from "../components/styled/Wrappers";
 
 import { Heading2 } from "../components/styled/styledTextContent";
 import { PreviewSingleWorkout } from "../components/PreviewSingleWorkout";
+import { WorkoutContext } from "../context/WorkoutContext";
+import { ActionWorkoutType, WorkoutReducer } from "../reducers/workoutReducer";
 
 export const CalendarView = () => {
   const token = getLocalStorage<string>("token");
   const loggedInUser = getLocalStorage<IUserLogin>("user");
   const [value, setValue] = useState<Value>(new Date());
-  const [workoutSchedule, setWorkoutSchedule] = useState<IWorkoutScheduele>({});
+  const [workoutSchedule, dispatch] = useReducer(WorkoutReducer, {
+    "": {
+      task: "",
+      repetition: "",
+      done: false,
+    },
+  });
 
   const [clickedWorkout, setClickedWorkout] = useState<IWorkout | undefined>();
   const [clickedDate, setClickedDate] = useState<string>();
@@ -38,19 +42,20 @@ export const CalendarView = () => {
         const workoutDetails = workout.workoutDetails;
         if (typeof workoutDetails === "string") {
           const parsedDetails = JSON.parse(workoutDetails);
-          setWorkoutSchedule(parsedDetails);
+          dispatch({ type: ActionWorkoutType.TOGGLE, payload: parsedDetails });
         } else {
-          setWorkoutSchedule(workoutDetails);
+          dispatch({ type: ActionWorkoutType.TOGGLE, payload: workoutDetails });
         }
       });
     };
 
     getWorkoutScheduele();
-  }, [setWorkoutSchedule, token, loggedInUser.userId]);
+  }, [token, loggedInUser.userId]);
 
   const tileClassName = ({ date, view }: { date: Date; view: string }) => {
     if (view === "month") {
       const dateString = formatDate(date);
+
       const workout = workoutSchedule[dateString];
       if (workout) {
         if (workout) {
@@ -92,13 +97,15 @@ export const CalendarView = () => {
               />
             </CalendarWrapper>
           </Wrapper>
-          <PreviewSingleWorkout
-            workoutSchedule={workoutSchedule}
-            token={token}
-            loggedInUser={loggedInUser}
-            workout={clickedWorkout}
-            date={clickedDate}
-          ></PreviewSingleWorkout>
+          <WorkoutContext.Provider value={{ workoutSchedule, dispatch }}>
+            <PreviewSingleWorkout
+              workoutSchedule={workoutSchedule}
+              token={token}
+              loggedInUser={loggedInUser}
+              workout={clickedWorkout}
+              date={clickedDate}
+            ></PreviewSingleWorkout>
+          </WorkoutContext.Provider>
         </>
       )}
     </>

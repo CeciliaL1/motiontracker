@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { IUserLogin } from "../models/IUsers";
 import { IWorkout, IWorkoutScheduele } from "../models/IWorkout";
 import { putData } from "../services/serviceBase";
 import { PrimaryButton } from "./styled/styledButtons";
 import { Heading1 } from "./styled/styledTextContent";
 import { Wrapper } from "./styled/Wrappers";
+import { ActionWorkoutType } from "../reducers/workoutReducer";
+import { WorkoutContext } from "../context/WorkoutContext";
 
 interface ISingleWorkoutProps {
   workout: IWorkout | undefined;
@@ -20,10 +23,11 @@ export const PreviewSingleWorkout = ({
   loggedInUser,
   workoutSchedule,
 }: ISingleWorkoutProps) => {
+  const { dispatch } = useContext(WorkoutContext);
   if (!workout) {
     return;
   }
-
+  console.log(workoutSchedule);
   const completeWorkout = async () => {
     if (workout) {
       workout.done = !workout.done;
@@ -40,6 +44,8 @@ export const PreviewSingleWorkout = ({
     );
 
     console.log(response);
+    console.log(workoutSchedule);
+    dispatch({ type: ActionWorkoutType.TOGGLE, payload: workoutSchedule });
   };
   return (
     <>
