@@ -31,7 +31,7 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
 
   const handleSaveWorkout = async () => {
     const response = await postData<ISaveWorkout, IWorkoutScheduele>(
-      "http://localhost:3000/api/workout/create",
+      "https://cecilial.hemsida.eu/api/workout/create",
       data,
       headers
     );

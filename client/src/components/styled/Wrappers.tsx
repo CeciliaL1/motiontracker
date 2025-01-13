@@ -13,6 +13,7 @@ interface IWrapperProps {
   backgroundColor?: string;
   padding?: number;
   width?: number;
+  marginbottom?: number;
 }
 
 interface ILinkWrapperProps {
@@ -27,6 +28,7 @@ export const Wrapper = styled.div<IWrapperProps>`
   flex-direction: ${(props) => props.direction};
   margin-top: ${(props) => props.margintop}%;
   margin-left: ${(props) => props.marginleft}%;
+  margin-bottom: ${(props) => props.marginbottom}%;
   flex-wrap: wrap;
   justify-content: center;
   justify-items: center;
@@ -109,6 +111,20 @@ export const CalendarWrapper = styled.div`
     background-color: #dbe3db;
   }
 
+  .react-calendar__tile {
+    height: 60px;
+    width: 60px;
+  }
+
+  .completed.available {
+    background-color: #88ab8e !important;
+    border: 2px solid black;
+  }
+
+  .not-completed.available {
+    background-color: #eee7da !important;
+    border: 2px solid black;
+  }
   .completed {
     background-color: #88ab8e !important;
     color: black;

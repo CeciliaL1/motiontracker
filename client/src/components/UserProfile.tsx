@@ -132,14 +132,14 @@ export const UserProfile = ({
     };
 
     const userRespone = await putData(
-      `http://localhost:3000/api/users/update/${userId}`,
+      `https://cecilial.hemsida.eu/api/users/update/${userId}`,
       userSettings,
       headers
     );
     console.log("user", userRespone);
 
     const profileRespone = await putData<IUserProfile, IResponse>(
-      `http://localhost:3000/api/profile/update/${userId}`,
+      `https://cecilial.hemsida.eu/api/profile/update/${userId}`,
       profileSettings,
       headers
     );

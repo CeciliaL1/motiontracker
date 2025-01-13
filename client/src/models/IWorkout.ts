@@ -23,5 +23,5 @@ export interface IWeekWorkout {
 
   export interface IWorkoutDetailsResponse {
     userId: string;
-    workoutDetails: IWorkoutScheduele
+    workoutDetails: string
 }
