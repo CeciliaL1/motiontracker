@@ -6,6 +6,8 @@
 
 
 ## Description
+Motiontracker targets individuals who are diagnosed with ataxi, parkinsson or MS and wants to strengthen their bodys and maintain their physic.
+Motiontracker is a webbapplication where you can sign in /sign up, set up a profile.  You input the motor issue and your physicslevel and with AI you can get a workout schedule generated fitting to your diagnos. The schedule can be saved to a calendar where you can get an overview of your schedule, click every induvidual workout and mark as complete or unmark the workout.
 
 ## Author
 - [@CeciliaL1](https://github.com/CeciliaL1)
