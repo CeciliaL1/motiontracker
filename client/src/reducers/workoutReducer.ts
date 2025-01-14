@@ -1,4 +1,4 @@
-import {  IWorkoutScheduele } from "../models/IWorkout";
+import { IWorkoutScheduele } from "../models/IWorkout";
 
 
   export interface IWorkoutAction {

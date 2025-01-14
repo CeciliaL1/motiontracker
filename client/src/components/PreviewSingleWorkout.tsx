@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { IUserLogin } from "../models/IUsers";
 import { IWorkout, IWorkoutScheduele } from "../models/IWorkout";
 import { putData } from "../services/serviceBase";
-import { PrimaryButton } from "./styled/styledButtons";
+import { PrimaryButton, SecondaryButton } from "./styled/styledButtons";
 import { Heading1 } from "./styled/styledTextContent";
 import { Wrapper } from "./styled/Wrappers";
 import { ActionWorkoutType } from "../reducers/workoutReducer";
@@ -27,10 +27,10 @@ export const PreviewSingleWorkout = ({
   if (!workout) {
     return;
   }
-  console.log(workoutSchedule);
+
   const completeWorkout = async () => {
     if (workout) {
-      workout.done = !workout.done;
+      workout.done = true;
     }
     const headers = {
       "Content-Type": "application/json",
@@ -44,7 +44,25 @@ export const PreviewSingleWorkout = ({
     );
 
     console.log(response);
-    console.log(workoutSchedule);
+    dispatch({ type: ActionWorkoutType.TOGGLE, payload: workoutSchedule });
+  };
+
+  const unCompleteWorkout = async () => {
+    if (workout) {
+      workout.done = false;
+    }
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    const response = await putData<object, string>(
+      `https://cecilial.hemsida.eu/api/workout/update/${loggedInUser.userId}`,
+      { workoutSchedule },
+      headers
+    );
+    console.log(response);
+
     dispatch({ type: ActionWorkoutType.TOGGLE, payload: workoutSchedule });
   };
   return (
@@ -55,6 +73,9 @@ export const PreviewSingleWorkout = ({
           <PrimaryButton onClick={completeWorkout}>
             Workout completed
           </PrimaryButton>
+          <SecondaryButton onClick={unCompleteWorkout}>
+            Unmark workout
+          </SecondaryButton>
         </Wrapper>
         <div>
           {workout.task} - {workout.repetition}
