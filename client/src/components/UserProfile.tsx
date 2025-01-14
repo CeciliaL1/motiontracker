@@ -209,7 +209,10 @@ export const UserProfile = ({
           </Wrapper>
           <Wrapper direction="row" margintop={6} gap={10}>
             {message === "" ? "" : message}
-            <PrimaryButton onClick={handleEditProfile}>
+            <PrimaryButton
+              aria-label="Edit profile"
+              onClick={handleEditProfile}
+            >
               Edit Profile
             </PrimaryButton>
           </Wrapper>
@@ -228,18 +231,22 @@ export const UserProfile = ({
             >
               <Heading2 marginbottom={20}>Personal information</Heading2>
               <Name
+                aria-label="First Name"
                 value={firstName}
                 onChange={(e) => handleFieldChange("firstName", e.target.value)}
               ></Name>
               <Name
+                aria-label="Last name"
                 value={lastName}
                 onChange={(e) => handleFieldChange("lastName", e.target.value)}
               ></Name>
               <Name
+                aria-label="User name"
                 value={userName}
                 onChange={(e) => handleFieldChange("userName", e.target.value)}
               ></Name>
               <Email
+                aria-label="Email"
                 value={email}
                 onChange={(e) => handleFieldChange("email", e.target.value)}
               ></Email>
@@ -257,6 +264,7 @@ export const UserProfile = ({
 
               <>
                 <TextInput
+                  aria-label="Age"
                   placeholder="Age"
                   name="Age"
                   value={age !== 0 ? age : ""}
@@ -266,30 +274,35 @@ export const UserProfile = ({
                   }}
                 ></TextInput>
                 <TextInput
+                  aria-label="Gender"
                   placeholder="Gender"
                   name="Gender"
                   value={gender !== "" ? gender : ""}
                   onChange={(e) => handleFieldChange("gender", e.target.value)}
                 ></TextInput>
                 <TextInput
+                  aria-label="Weight in kg"
                   placeholder="Weight in kg"
                   name="Weight"
                   value={weight !== 0 ? weight : ""}
                   onChange={(e) => handleFieldChange("weight", e.target.value)}
                 ></TextInput>
                 <TextInput
+                  aria-label="Height in cm"
                   placeholder="Height in cm "
                   name="Height"
                   value={height !== 0 ? height : ""}
                   onChange={(e) => handleFieldChange("height", e.target.value)}
                 ></TextInput>
                 <TextInput
+                  aria-label="Diagnos"
                   placeholder="Diagnos"
                   name="Diagnos"
                   value={diagnos !== "" ? diagnos : ""}
                   onChange={(e) => handleFieldChange("diagnos", e.target.value)}
                 ></TextInput>
                 <TextInput
+                  aria-label="Physics level, 1-10"
                   placeholder="Physics level, 1-10"
                   name="PhysicsLevel"
                   value={physicsLevel !== 0 ? physicsLevel : ""}
@@ -301,7 +314,11 @@ export const UserProfile = ({
             </Wrapper>
           </Wrapper>
           <Wrapper direction="row" margintop={6} gap={10}>
-            <PrimaryButton marginbottom={50} onClick={handleSaveEdit}>
+            <PrimaryButton
+              aria-label="Save profile"
+              marginbottom={50}
+              onClick={handleSaveEdit}
+            >
               Save
             </PrimaryButton>
           </Wrapper>

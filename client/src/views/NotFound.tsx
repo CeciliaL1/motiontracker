@@ -19,7 +19,9 @@ export const NotFound = () => {
             Oops! The page you are looking for does not exist!
           </NotFoundDescription>
           <LinkWrap margintop={5} marginleft={0} fontsize={1} fontweight={700}>
-            <Link to="/">Go to start</Link>
+            <Link aria-label="Link to start page" to="/">
+              Go to start
+            </Link>
           </LinkWrap>
         </Wrapper>
       </NotFoundWrapper>

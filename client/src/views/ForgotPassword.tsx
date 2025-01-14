@@ -11,14 +11,18 @@ export const ForgotPassword = () => {
         <Form>
           <Heading2 marginbottom={20}>Forgot password</Heading2>
           <Email></Email>
-          <PrimaryButton marginbottom={10}>Send</PrimaryButton>
+          <PrimaryButton aria-label="Send" marginbottom={10}>
+            Send
+          </PrimaryButton>
           <LinkWrap
             margintop={15}
             marginleft={250}
             fontsize={0.9}
             fontweight={500}
           >
-            <Link to="/signin">Back to sign in</Link>
+            <Link aria-label="Back to sign in" to="/signin">
+              Back to sign in
+            </Link>
           </LinkWrap>
         </Form>
       </Wrapper>

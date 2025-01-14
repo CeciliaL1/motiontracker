@@ -70,10 +70,10 @@ export const PreviewSingleWorkout = ({
       <Wrapper direction="column" margintop={5} marginbottom={20}>
         <Wrapper direction="row" margintop={2} gap={100} marginbottom={7}>
           <Heading1>{date}</Heading1>
-          <PrimaryButton onClick={completeWorkout}>
+          <PrimaryButton aria-label="Workout completed" onClick={completeWorkout}>
             Workout completed
           </PrimaryButton>
-          <SecondaryButton onClick={unCompleteWorkout}>
+          <SecondaryButton aria-label="Unmark completed workout" onClick={unCompleteWorkout}>
             Unmark workout
           </SecondaryButton>
         </Wrapper>

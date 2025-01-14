@@ -110,6 +110,7 @@ export const GenerateWorkout = () => {
     <>
       <Wrapper direction="row" margintop={13}>
         <GenerateButton
+          aria-label="Generate workout"
           onClick={() => {
             generateWorkout();
           }}

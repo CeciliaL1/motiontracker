@@ -61,7 +61,11 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
                   );
                 })}
               </Ul>
-              <PrimaryButton marginbottom={100} onClick={handleSaveWorkout}>
+              <PrimaryButton
+                aria-label="Save generated workout"
+                marginbottom={100}
+                onClick={handleSaveWorkout}
+              >
                 Save workout
               </PrimaryButton>
             </>

@@ -31,7 +31,9 @@ export const HowToUse = () => {
             fontsize={1}
             fontweight={700}
           >
-            <Link to="/signin">Sign in</Link>
+            <Link aria-label="Link to sign in" to="/signin">
+              Sign in
+            </Link>
             <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>
           <LinkWrap
@@ -40,7 +42,9 @@ export const HowToUse = () => {
             fontsize={1}
             fontweight={700}
           >
-            <Link to="/signup">Sign up</Link>
+            <Link aria-label="Link to sign up" to="/signup">
+              Sign up
+            </Link>
             <i className="fa-solid fa-arrow-right"></i>
           </LinkWrap>
         </Wrapper>

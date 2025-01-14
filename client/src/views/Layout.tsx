@@ -69,7 +69,7 @@ export const Layout = () => {
                 }}
                 whileHover={{ scale: 1.2 }}
               >
-                <NavLink to="/" onClick={handleMenuClick}>
+                <NavLink aria-label="Navigation link to start" to="/" onClick={handleMenuClick}>
                   Start
                 </NavLink>
               </motion.li>
@@ -86,7 +86,7 @@ export const Layout = () => {
                 }}
                 whileHover={{ scale: 1.2 }}
               >
-                <NavLink to="/howtouse" onClick={handleMenuClick}>
+                <NavLink aria-label="Navigation link to how to use" to="/howtouse" onClick={handleMenuClick}>
                   How to use
                 </NavLink>
               </motion.li>
@@ -104,7 +104,7 @@ export const Layout = () => {
                 whileHover={{ scale: 1.2 }}
               >
                 {" "}
-                <NavLink to="/signin" onClick={handleMenuClick}>
+                <NavLink aria-label="Navigation link to Sign in" to="/signin" onClick={handleMenuClick}>
                   Sign in
                 </NavLink>
               </motion.li>
@@ -122,7 +122,7 @@ export const Layout = () => {
                 whileHover={{ scale: 1.2 }}
               >
                 {" "}
-                <NavLink to="/signup" onClick={handleMenuClick}>
+                <NavLink aria-label="Navigation link to sign up" to="/signup" onClick={handleMenuClick}>
                   Sign up
                 </NavLink>
               </motion.li>
@@ -134,17 +134,17 @@ export const Layout = () => {
           <NavMenuLoggedIn background="D9D9D9" size="1.2">
             <ul>
               <li>
-                <NavLink to="/profile">
+                <NavLink aria-label="Navigation link to profile" to="/profile">
                   <i className="fa-solid fa-user"></i>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/workout">
+                <NavLink aria-label="Navigation link to Generate workout" to="/workout">
                   <i className="fa-solid fa-gears"></i>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/calendar">
+                <NavLink aria-label="Navigation link to calendar" to="/calendar">
                   <i className="fa-regular fa-calendar"></i>
                 </NavLink>
               </li>
@@ -155,7 +155,7 @@ export const Layout = () => {
           </NavMenuLoggedIn>
         )}
         {!state.isAuthenticated && (
-          <HamburgerMenu open={open} onClick={handleClick}>
+          <HamburgerMenu aria-label="Meny" open={open} onClick={handleClick}>
             <div></div>
             <div></div>
             <div></div>
@@ -177,8 +177,8 @@ export const Layout = () => {
         <section>
           <div>ThisAddress 345</div>
           <div>
-            <a href="#">info@motiontracker.se</a>
-            <a href="#">070 123 45 67</a>
+            <a aria-label="email address" href="#">info@motiontracker.se</a>
+            <a  aria-label="Phone number" href="#">070 123 45 67</a>
           </div>
         </section>
         <section>
