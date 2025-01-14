@@ -2,11 +2,10 @@
 ## Thesis 
 
 ## Demolink
-Link will be avalible soon
+-[DemoLink](https://cecilial.hemsida.eu)
 
 
-## The following should happen
-
+## Description
 
 ## Author
 - [@CeciliaL1](https://github.com/CeciliaL1)
@@ -53,6 +52,13 @@ nodemon start
 ```
 
 ## Dependencies
+- Axios
+- Cypress
+- framer-motion
+- OpenAi
+- react-calendar
+- react-router
+- styled-components
 
 
 
