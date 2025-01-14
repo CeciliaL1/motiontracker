@@ -11,7 +11,8 @@ export interface IInitialState  {
 };
 export enum ActionUserType {
     LOGIN,
-    LOGOUT
+    LOGOUT,
+    WRONG
 }
   
   export const UserReducer = (state: IInitialState, action: IUserAction) => {
@@ -23,6 +24,12 @@ export enum ActionUserType {
           user: action.payload, 
         };
       case ActionUserType.LOGOUT:
+        return {
+          ...state,
+          isAuthenticated: false,
+          user: null,
+        };
+        case ActionUserType.WRONG:
         return {
           ...state,
           isAuthenticated: false,

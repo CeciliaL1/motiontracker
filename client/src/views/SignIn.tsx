@@ -46,13 +46,14 @@ export const SignIn = () => {
       if (response.message) {
         setErrorMessage(response.message);
         setIsError(true);
+        dispatch({ type: ActionUserType.WRONG, payload: null });
+        console.log(response);
+      } else {
+        setLocalStorage("user", response.user);
+        setLocalStorage("token", response.token);
+        navigate("/calendar");
+        dispatch({ type: ActionUserType.LOGIN, payload: response.user });
       }
-
-      setLocalStorage("user", response.user);
-      setLocalStorage("token", response.token);
-
-      dispatch({ type: ActionUserType.LOGIN, payload: response.user });
-      navigate("/calendar");
     } catch (error) {
       console.error("Error logging in:", error);
       setErrorMessage("Something went wrong. Please try again.");
@@ -67,7 +68,7 @@ export const SignIn = () => {
           {isError && (
             <>
               <div aria-live="assertive">
-                <p>{errorMessage}</p>
+                <p id="error-message">{errorMessage}</p>
               </div>
             </>
           )}
@@ -103,6 +104,7 @@ export const SignIn = () => {
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               handleSignIn(e);
             }}
+            id="signInButton"
           >
             Sign in
           </PrimaryButton>
