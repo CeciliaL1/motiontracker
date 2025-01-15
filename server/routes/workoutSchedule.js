@@ -78,7 +78,6 @@ router.post("/generate-workout", async (req, res) => {
 router.put("/update/:userId", verifyToken, (req, res) => {
   const userId = req.params.userId;
   const { workoutSchedule } = req.body;
-  console.log(workoutSchedule);
 
   const sql = `UPDATE workout_schedule SET workoutDetails = ? WHERE userId = ?`;
   const values = [JSON.stringify(workoutSchedule), userId];

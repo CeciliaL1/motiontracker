@@ -19,7 +19,7 @@ router.get("/:userId", verifyToken, (req, res) => {
       });
     }
 
-    if (Object.keys(result).length === 0) {
+    if (Object.keys(result) === "[]") {
       res.status(404).json({ message: "No settings where found" });
     } else {
       res.json(result);
