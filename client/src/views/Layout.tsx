@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import { Footer, Header, Main } from "../components/styled/styledLayouts";
 import { useContext, useEffect, useState } from "react";
 import {
@@ -39,7 +39,6 @@ export const Layout = () => {
     <>
       <Header>
         <motion.a
-          href="#"
           initial={{
             opacity: 0,
           }}
@@ -51,7 +50,15 @@ export const Layout = () => {
             },
           }}
         >
-          <img src="public/motiontracker_svg.svg" alt="" />
+          {state.isAuthenticated ? (
+            <Link to="/calendar">
+              <img src="public/motiontracker_svg.svg" alt="" />
+            </Link>
+          ) : (
+            <Link to="/">
+              <img src="public/motiontracker_svg.svg" alt="" />
+            </Link>
+          )}
         </motion.a>
         {!state.isAuthenticated && (
           <NavMenu open={open}>
@@ -69,7 +76,11 @@ export const Layout = () => {
                 }}
                 whileHover={{ scale: 1.2 }}
               >
-                <NavLink aria-label="Navigation link to start" to="/" onClick={handleMenuClick}>
+                <NavLink
+                  aria-label="Navigation link to start"
+                  to="/"
+                  onClick={handleMenuClick}
+                >
                   Start
                 </NavLink>
               </motion.li>
@@ -86,7 +97,11 @@ export const Layout = () => {
                 }}
                 whileHover={{ scale: 1.2 }}
               >
-                <NavLink aria-label="Navigation link to how to use" to="/howtouse" onClick={handleMenuClick}>
+                <NavLink
+                  aria-label="Navigation link to how to use"
+                  to="/howtouse"
+                  onClick={handleMenuClick}
+                >
                   How to use
                 </NavLink>
               </motion.li>
@@ -104,7 +119,11 @@ export const Layout = () => {
                 whileHover={{ scale: 1.2 }}
               >
                 {" "}
-                <NavLink aria-label="Navigation link to Sign in" to="/signin" onClick={handleMenuClick}>
+                <NavLink
+                  aria-label="Navigation link to Sign in"
+                  to="/signin"
+                  onClick={handleMenuClick}
+                >
                   Sign in
                 </NavLink>
               </motion.li>
@@ -122,7 +141,11 @@ export const Layout = () => {
                 whileHover={{ scale: 1.2 }}
               >
                 {" "}
-                <NavLink aria-label="Navigation link to sign up" to="/signup" onClick={handleMenuClick}>
+                <NavLink
+                  aria-label="Navigation link to sign up"
+                  to="/signup"
+                  onClick={handleMenuClick}
+                >
                   Sign up
                 </NavLink>
               </motion.li>
@@ -139,12 +162,18 @@ export const Layout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink aria-label="Navigation link to Generate workout" to="/workout">
+                <NavLink
+                  aria-label="Navigation link to Generate workout"
+                  to="/workout"
+                >
                   <i className="fa-solid fa-gears"></i>
                 </NavLink>
               </li>
               <li>
-                <NavLink aria-label="Navigation link to calendar" to="/calendar">
+                <NavLink
+                  aria-label="Navigation link to calendar"
+                  to="/calendar"
+                >
                   <i className="fa-regular fa-calendar"></i>
                 </NavLink>
               </li>
@@ -177,8 +206,12 @@ export const Layout = () => {
         <section>
           <div>ThisAddress 345</div>
           <div>
-            <a aria-label="email address" href="#">info@motiontracker.se</a>
-            <a  aria-label="Phone number" href="#">070 123 45 67</a>
+            <a aria-label="email address" href="#">
+              info@motiontracker.se
+            </a>
+            <a aria-label="Phone number" href="#">
+              070 123 45 67
+            </a>
           </div>
         </section>
         <section>
