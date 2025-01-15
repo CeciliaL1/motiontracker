@@ -29,6 +29,7 @@ export const SignUp = () => {
     email: "",
     password: "",
     userName: "",
+    form: "",
   });
 
   const userData: IUserSignUp = {
@@ -40,6 +41,10 @@ export const SignUp = () => {
   };
 
   const handleChange = (field: string, value: string) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ["form"]: "",
+    }));
     setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
     switch (field) {
       case "firstName":
@@ -58,6 +63,10 @@ export const SignUp = () => {
         setUserPassword(value);
         break;
     }
+    isInputvalid(field, value);
+  };
+
+  const isInputvalid = (field: string, value: string) => {
     const isValid = validateInputs(field, value);
     if (!isValid) {
       let errorMessage = "";
@@ -80,7 +89,13 @@ export const SignUp = () => {
 
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    if (!userName || !firstName || !lastName || !userEmail || !userPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ["form"]: "You cant leave any fields empty",
+      }));
+      return;
+    }
     const headers = {
       "Content-Type": "application/json",
     };
@@ -108,7 +123,7 @@ export const SignUp = () => {
           ></FirstName>
           {errors.firstName && (
             <ErrorMessage aria-live="assertive">
-              <p>{errors.firstName}</p>
+              <p id="error-message-firstname">{errors.firstName}</p>
             </ErrorMessage>
           )}
 
@@ -121,7 +136,7 @@ export const SignUp = () => {
           ></LastName>
           {errors.lastName && (
             <ErrorMessage aria-live="assertive">
-              <p>{errors.lastName}</p>
+              <p id="error-message-lastname">{errors.lastName}</p>
             </ErrorMessage>
           )}
           <Email
@@ -133,7 +148,7 @@ export const SignUp = () => {
           ></Email>
           {errors.email && (
             <ErrorMessage aria-live="assertive">
-              <p>{errors.email}</p>
+              <p id="error-message-email">{errors.email}</p>
             </ErrorMessage>
           )}
           <Name
@@ -145,7 +160,7 @@ export const SignUp = () => {
           ></Name>
           {errors.userName && (
             <ErrorMessage aria-live="assertive">
-              <p>{errors.userName}</p>
+              <p id="error-message-username">{errors.userName}</p>
             </ErrorMessage>
           )}
           <Password
@@ -157,11 +172,12 @@ export const SignUp = () => {
           ></Password>
           {errors.password && (
             <ErrorMessage aria-live="assertive">
-              <p>{errors.password}</p>
+              <p id="error-message-password">{errors.password}</p>
             </ErrorMessage>
           )}
 
           <PrimaryButton
+            id="signUpButton"
             margintop={50}
             marginbottom={10}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -170,6 +186,11 @@ export const SignUp = () => {
           >
             Sign up
           </PrimaryButton>
+          {errors.form && (
+            <ErrorMessage aria-live="assertive">
+              <p id="error-message-form">{errors.form}</p>
+            </ErrorMessage>
+          )}
           <LinkWrap
             margintop={5}
             marginleft={250}
