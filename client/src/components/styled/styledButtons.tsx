@@ -7,6 +7,7 @@ interface IButtonProps {
 
 export const PrimaryButton = styled.button<IButtonProps>`
   background-color: #88ab8e;
+  color: black;
   height: 35px;
   width: 350px;
   margin-top: ${(props) => props.margintop}px;
@@ -30,6 +31,7 @@ export const SecondaryButton = styled(PrimaryButton)`
   background-color: #f2f1eb;
   border: 1px solid #88ab8e;
   font-family: "Raleway", serif;
+  color: black;
 
   &:hover {
     background-color: #dbe3db;
@@ -51,6 +53,7 @@ export const GenerateButton = styled.button`
   text-transform: uppercase;
   cursor: pointer;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: black;
   i {
     margin-left: 10px;
   }
