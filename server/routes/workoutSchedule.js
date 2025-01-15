@@ -16,7 +16,7 @@ router.get("/:userId", verifyToken, (req, res) => {
   connection.query(sql, value, (err, result) => {
     if (err) throw err;
 
-    if (Object.keys(result).length === 0) {
+    if (result === "[]") {
       res.status(404).json({ message: "No workout for the userId found" });
     } else {
       res.json(result);

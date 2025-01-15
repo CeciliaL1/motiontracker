@@ -44,6 +44,7 @@ router.post("/add", verifyToken, (req, res) => {
 
   connection.query(sql, values, (err, result) => {
     if (err) {
+      console.log(err);
       return res.status(500).json({
         error: "Database error",
       });
