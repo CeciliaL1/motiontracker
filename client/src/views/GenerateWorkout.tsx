@@ -103,18 +103,22 @@ export const GenerateWorkout = () => {
         },
       ],
     });
-    const response = await postData<string, IOpenAiResponse>(
-      "https://cecilial.hemsida.eu/api/workout/generate-workout",
-      data,
-      headers
-    );
+    try {
+      const response = await postData<string, IOpenAiResponse>(
+        "https://cecilial.hemsida.eu/api/workout/generate-workout",
+        data,
+        headers
+      );
 
-    const responseContent = response.choices[0].message.content;
-    console.log(responseContent);
-    const parsedContent = parsedWorkoutContent(responseContent);
+      const responseContent = response.choices[0].message.content;
 
-    setSchedule(parsedContent);
-    setIsLoading(false);
+      const parsedContent = parsedWorkoutContent(responseContent);
+
+      setSchedule(parsedContent);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
