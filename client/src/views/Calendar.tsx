@@ -18,13 +18,7 @@ export const CalendarView = () => {
   const token = getLocalStorage<string>("token");
   const loggedInUser = getLocalStorage<IUserLogin>("user");
   const [value, setValue] = useState<Value>(new Date());
-  const [workoutSchedule, dispatch] = useReducer(WorkoutReducer, {
-    "": {
-      task: "",
-      repetition: "",
-      done: false,
-    },
-  });
+  const [workoutSchedule, dispatch] = useReducer(WorkoutReducer, {});
 
   const [clickedWorkout, setClickedWorkout] = useState<IWorkout | undefined>();
   const [clickedDate, setClickedDate] = useState<string>();
@@ -38,6 +32,7 @@ export const CalendarView = () => {
         `https://cecilial.hemsida.eu/api/workout/${loggedInUser.userId}`,
         headers
       );
+
       response.map((workout) => {
         const workoutDetails = workout.workoutDetails;
         if (typeof workoutDetails === "string") {
@@ -78,7 +73,7 @@ export const CalendarView = () => {
   };
   return (
     <>
-      {!workoutSchedule ? (
+      {Object.keys(workoutSchedule).length === 0 ? (
         <Wrapper direction="column" margintop={10}>
           <Heading2>Det finns inget träningsschema</Heading2>
         </Wrapper>
