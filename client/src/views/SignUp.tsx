@@ -175,6 +175,11 @@ export const SignUp = () => {
               <p id="error-message-password">{errors.password}</p>
             </ErrorMessage>
           )}
+          {errors.form && (
+            <ErrorMessage aria-live="assertive">
+              <p id="error-message-form">{errors.form}</p>
+            </ErrorMessage>
+          )}
 
           <PrimaryButton
             id="signUpButton"
@@ -186,11 +191,7 @@ export const SignUp = () => {
           >
             Sign up
           </PrimaryButton>
-          {errors.form && (
-            <ErrorMessage aria-live="assertive">
-              <p id="error-message-form">{errors.form}</p>
-            </ErrorMessage>
-          )}
+
           <LinkWrap
             margintop={5}
             marginleft={250}
