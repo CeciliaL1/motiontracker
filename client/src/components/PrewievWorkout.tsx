@@ -6,7 +6,7 @@ import { Spinner } from "./Spinner";
 import { PrimaryButton } from "./styled/styledButtons";
 import { Heading2 } from "./styled/styledTextContent";
 import { Ul } from "./styled/styledUl";
-
+import { useNavigate } from "react-router";
 import { Wrapper } from "./styled/Wrappers";
 
 interface IPreviewProps {
@@ -19,11 +19,13 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
   const loggedInUser = getLocalStorage<IUserLogin>("user");
   const token = getLocalStorage<string>("token");
 
+  const navigate = useNavigate();
+
   const data = {
     workoutDetails: schedule,
     userId: loggedInUser.userId,
   };
-  console.log(schedule);
+
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -37,6 +39,7 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
     );
 
     console.log(response);
+    navigate("/calendar");
   };
 
   return (
