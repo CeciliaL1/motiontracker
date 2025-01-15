@@ -13,6 +13,7 @@ export const Profile = () => {
   const { userId } = inloggedProfile;
   const token = getLocalStorage<string>("token");
 
+  const [message, setMessage] = useState("");
   const [userData, setUserData] = useState<IUserProfile[]>([
     {
       profileId: 0,
@@ -35,7 +36,11 @@ export const Profile = () => {
         `https://cecilial.hemsida.eu/api/profile/${userId}`,
         headers
       );
-
+      if (response.length === 0) {
+        setMessage(
+          "You´ll need to edit your profile and insert values to be able to generate a workout"
+        );
+      }
       setUserData(response);
     };
     getUserData();
@@ -45,6 +50,7 @@ export const Profile = () => {
     <>
       <ProfileContext.Provider value={{ state, dispatch }}>
         <UserProfile
+          profileMessage={message}
           userProfile={userData}
           loggedInUser={inloggedProfile}
         ></UserProfile>

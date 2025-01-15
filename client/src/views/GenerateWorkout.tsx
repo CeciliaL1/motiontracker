@@ -9,6 +9,7 @@ import { IUserLogin } from "../models/IUsers";
 import { IOpenAiResponse } from "../models/IOpenAi";
 import { parsedWorkoutContent } from "../helperfuntions/parseWorkoutContent";
 import { IWorkoutScheduele } from "../models/IWorkout";
+import { ErrorMessage } from "../components/styled/styledError";
 
 export const GenerateWorkout = () => {
   const loggedInUser = getLocalStorage<IUserLogin>("user");
@@ -17,6 +18,8 @@ export const GenerateWorkout = () => {
   const [schedule, setSchedule] = useState<IWorkoutScheduele>({
     "": { task: "", repetition: 0, done: false },
   });
+
+  const [message, setMessage] = useState("");
 
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState("");
@@ -36,7 +39,11 @@ export const GenerateWorkout = () => {
         `https://cecilial.hemsida.eu/api/profile/${loggedInUser.userId}`,
         headers
       );
-
+      if (response.length === 0) {
+        setMessage(
+          "You´ll need to edit your profile and insert values to be able to generate a workout"
+        );
+      }
       response.map((user) => {
         setAge(user.age);
         setGender(user.gender);
@@ -50,6 +57,9 @@ export const GenerateWorkout = () => {
   }, [loggedInUser, token]);
 
   const generateWorkout = async () => {
+    if (message) {
+      return;
+    }
     const date = new Date();
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -117,6 +127,13 @@ export const GenerateWorkout = () => {
         >
           Generate<i className="fa-solid fa-wand-magic-sparkles"></i>
         </GenerateButton>
+      </Wrapper>
+      <Wrapper direction="row" margintop={1}>
+        {message && (
+          <ErrorMessage>
+            <p>{message}</p>
+          </ErrorMessage>
+        )}
       </Wrapper>
 
       <PrewviewWorkout

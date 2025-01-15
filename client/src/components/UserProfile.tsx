@@ -7,17 +7,20 @@ import { PrimaryButton } from "./styled/styledButtons";
 import { ActionProfileType } from "../reducers/profileReducer";
 import { Email, Name, TextInput } from "./styled/styledInputs";
 import { Heading2 } from "./styled/styledTextContent";
-import { putData } from "../services/serviceBase";
+import { getData, postData, putData } from "../services/serviceBase";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
+import { ErrorMessage } from "./styled/styledError";
 
 interface IUserProfileProps {
   userProfile: IUserProfile[];
   loggedInUser: IUserLogin;
+  profileMessage: string;
 }
 
 export const UserProfile = ({
   userProfile,
   loggedInUser,
+  profileMessage,
 }: IUserProfileProps) => {
   const { state, dispatch } = useContext(ProfileContext);
   const [message, setMessage] = useState("");
@@ -118,6 +121,7 @@ export const UserProfile = ({
     };
 
     const profileSettings = {
+      userId,
       age,
       gender,
       weight,
@@ -126,26 +130,45 @@ export const UserProfile = ({
       physicsLevel,
     };
 
+    const getHeaders = {
+      Authorization: `Bearer ${token}`,
+    };
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
 
-    const userRespone = await putData(
-      `https://cecilial.hemsida.eu/api/users/update/${userId}`,
-      userSettings,
-      headers
+    const getProfile = await getData<IUserProfile>(
+      `https://cecilial.hemsida.eu/api/profile/${userId}`,
+      getHeaders
     );
-    console.log("user", userRespone);
 
-    const profileRespone = await putData<IUserProfile, IResponse>(
-      `https://cecilial.hemsida.eu/api/profile/update/${userId}`,
-      profileSettings,
-      headers
-    );
-    setMessage(profileRespone.message);
+    if (Object.keys(getProfile).length === 0) {
+      const response = await postData<IUserProfile, IResponse>(
+        `https://cecilial.hemsida.eu/api/profile/add`,
+        profileSettings,
+        headers
+      );
+      console.log(response);
+      dispatch({ type: ActionProfileType.TOGGLE, payload: false });
+    } else {
+      const userRespone = await putData(
+        `https://cecilial.hemsida.eu/api/users/update/${userId}`,
+        userSettings,
+        headers
+      );
+      console.log("user", userRespone);
 
-    dispatch({ type: ActionProfileType.TOGGLE, payload: false });
+      const profileRespone = await putData<IUserProfile, IResponse>(
+        `https://cecilial.hemsida.eu/api/profile/update/${userId}`,
+        profileSettings,
+        headers
+      );
+      setMessage(profileRespone.message);
+
+      dispatch({ type: ActionProfileType.TOGGLE, payload: false });
+    }
   };
   return (
     <>
@@ -207,6 +230,7 @@ export const UserProfile = ({
               </>
             </Wrapper>
           </Wrapper>
+
           <Wrapper direction="row" margintop={6} gap={10}>
             {message === "" ? "" : message}
             <PrimaryButton
@@ -215,6 +239,11 @@ export const UserProfile = ({
             >
               Edit Profile
             </PrimaryButton>
+            {profileMessage && (
+              <ErrorMessage>
+                <p>{profileMessage}</p>
+              </ErrorMessage>
+            )}
           </Wrapper>
         </>
       )}
@@ -269,7 +298,6 @@ export const UserProfile = ({
                   name="Age"
                   value={age !== 0 ? age : ""}
                   onChange={(e) => {
-                    console.log("ändras");
                     handleFieldChange("age", e.target.value);
                   }}
                 ></TextInput>
