@@ -139,4 +139,15 @@ export const CalendarWrapper = styled.div`
     color: black;
     border: 1px solid;
   }
+
+  @media screen and (max-width: 650px) {
+    .react-calendar {
+      width: 300px;
+    }
+  }
+  @media screen and (min-width: 650px) and (max-width: 1050px) {
+    .react-calendar {
+      width: 600px;
+    }
+  }
 `;
