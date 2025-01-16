@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { IWorkout, IWorkoutDetailsResponse } from "../models/IWorkout";
+import { IWorkoutDetailsResponse } from "../models/IWorkout";
 import { getData } from "../services/serviceBase";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
 import { IUserLogin } from "../models/IUsers";
@@ -20,9 +20,6 @@ export const CalendarView = () => {
   const [value, setValue] = useState<Value>(new Date());
   const [workoutSchedule, dispatch] = useReducer(WorkoutReducer, {});
 
-  const [clickedWorkout, setClickedWorkout] = useState<
-    IWorkout[] | undefined
-  >();
   const [clickedDate, setClickedDate] = useState<string>();
 
   useEffect(() => {
@@ -70,9 +67,7 @@ export const CalendarView = () => {
     const date = new Date(e);
     const dateString = formatDate(date);
 
-    const workout = workoutSchedule[dateString];
     setClickedDate(dateString);
-    setClickedWorkout(workout);
   };
   return (
     <>
@@ -100,7 +95,6 @@ export const CalendarView = () => {
               workoutSchedule={workoutSchedule}
               token={token}
               loggedInUser={loggedInUser}
-              workout={clickedWorkout}
               date={clickedDate}
             ></PreviewSingleWorkout>
           </WorkoutContext.Provider>

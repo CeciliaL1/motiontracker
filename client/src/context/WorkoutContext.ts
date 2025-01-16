@@ -9,5 +9,5 @@ interface IWorkoutContext {
 }
 
 export const WorkoutContext = createContext<IWorkoutContext>({
-    workoutSchedule: {'':{task:'', repetition:'', done: false}}, dispatch: () => null
+    workoutSchedule: {}, dispatch: () => null
 })

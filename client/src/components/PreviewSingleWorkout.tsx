@@ -98,7 +98,7 @@ export const PreviewSingleWorkout = ({
         <Wrapper direction="row" margintop={2} gap={100} marginbottom={7}>
           <Heading1>{date}</Heading1>
           <PrimaryButton
-            aria-label="MMark workout as completed"
+            aria-label="Mark workout as completed"
             onClick={completeAllWorkoutsForDate}
           >
             Mark workout as completed
