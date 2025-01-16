@@ -56,14 +56,23 @@ export const PrewviewWorkout = ({ schedule, isLoading }: IPreviewProps) => {
                 {Object.keys(schedule).map((workout) => {
                   const task = schedule[workout];
                   return (
-                    <li key={workout}>
-                      <h4>{workout}</h4>
-                      <p>{task.task}</p>
-                      <p>{task.repetition}</p>
-                    </li>
+                    <>
+                      <li key={workout}>
+                        <h4>{workout}</h4>
+
+                        {task.map((t) => (
+                          <>
+                            <p>
+                              {t.task} <span>{t.repetition}</span>
+                            </p>
+                          </>
+                        ))}
+                      </li>
+                    </>
                   );
                 })}
               </Ul>
+
               <PrimaryButton
                 aria-label="Save generated workout"
                 marginbottom={100}
