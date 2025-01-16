@@ -1,5 +1,5 @@
 export interface IWorkoutScheduele {
-    [date:string]: IWorkout
+    [date:string]: IWorkout[]
 }
 
 export interface IWorkout {
