@@ -11,10 +11,12 @@ import {
 import { Heading2 } from "../components/styled/styledTextContent";
 import { LinkWrap, Wrapper } from "../components/styled/Wrappers";
 import { useState } from "react";
-import { IUserLogin, IUserSignUp } from "../models/IUsers";
+import { IUserSignUp } from "../models/IUsers";
 import { postData } from "../services/serviceBase";
 import { validateInputs } from "../helperfuntions/validateInputs";
 import { ErrorMessage } from "../components/styled/styledError";
+import { IResponse } from "../models/IUserProfile";
+import { useNavigate } from "react-router";
 
 export const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -22,6 +24,10 @@ export const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
+
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -96,16 +102,32 @@ export const SignUp = () => {
       }));
       return;
     }
+    if (
+      errors.email ||
+      errors.password ||
+      errors.firstName ||
+      errors.lastName ||
+      errors.userName
+    ) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ["form"]: "Some of the fields are not correctly filled out",
+      }));
+      return;
+    }
     const headers = {
       "Content-Type": "application/json",
     };
 
-    const response = await postData<IUserSignUp, IUserLogin>(
+    const response = await postData<IUserSignUp, IResponse>(
       "https://cecilial.hemsida.eu/api/users/add",
       userData,
       headers
     );
-    console.log(response);
+    setMessage(response.message);
+    setTimeout(() => {
+      navigate("/signin");
+    }, 2000);
   };
 
   return (
@@ -176,11 +198,17 @@ export const SignUp = () => {
             </ErrorMessage>
           )}
           {errors.form && (
-            <ErrorMessage aria-live="assertive">
-              <p id="error-message-form">{errors.form}</p>
-            </ErrorMessage>
+            <div aria-live="assertive">
+              <p id="error-message">{errors.form}</p>
+            </div>
           )}
-
+          {message && (
+            <>
+              <div aria-live="assertive">
+                <p id="error-message">{message}</p>
+              </div>
+            </>
+          )}
           <PrimaryButton
             id="signUpButton"
             margintop={50}
