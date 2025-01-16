@@ -20,7 +20,9 @@ export const CalendarView = () => {
   const [value, setValue] = useState<Value>(new Date());
   const [workoutSchedule, dispatch] = useReducer(WorkoutReducer, {});
 
-  const [clickedWorkout, setClickedWorkout] = useState<IWorkout | undefined>();
+  const [clickedWorkout, setClickedWorkout] = useState<
+    IWorkout[] | undefined
+  >();
   const [clickedDate, setClickedDate] = useState<string>();
 
   useEffect(() => {
@@ -53,11 +55,13 @@ export const CalendarView = () => {
 
       const workout = workoutSchedule[dateString];
       if (workout) {
-        if (workout) {
-          const status = workout.done ? "completed" : "not-completed";
-          const taskClass = workout.task ? "available" : "";
+        const classNames = workout.map((work) => {
+          const status = work.done ? "completed" : "not-completed";
+          const taskClass = work.task ? "available" : "";
           return `${status} ${taskClass}`;
-        }
+        });
+
+        return classNames.join(" ");
       }
     }
     return null;
@@ -68,7 +72,6 @@ export const CalendarView = () => {
 
     const workout = workoutSchedule[dateString];
     setClickedDate(dateString);
-
     setClickedWorkout(workout);
   };
   return (
