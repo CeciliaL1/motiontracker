@@ -10,13 +10,12 @@ export const Start = () => {
           <Heading1 margintop={30} marginbottom={50} marginleft={40}>
             Welcome to MotionTracker
           </Heading1>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          MotionTracker is a fitness tracker designed to empower individuals
+          with conditions such as Ataxia, Parkinson’s, and Multiple Sclerosis to
+          lead healthier, more active lives. Using AI, the app develops
+          personalized training schedules tailored to specific workout goals,
+          taking into account the unique needs of users living with these
+          conditions.
         </LongText>
         <div>
           <ImageWrapper

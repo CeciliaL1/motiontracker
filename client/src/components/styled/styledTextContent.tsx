@@ -21,8 +21,10 @@ export const LongText = styled.div`
   margin-top: 40px;
   max-width: 600px;
   font-family: "Roboto", serif;
-  font-weight: 400;
+
   font-style: normal;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
   @media screen and (max-width: 800px) {
     padding-left: 10px;
     padding-right: 10px;
