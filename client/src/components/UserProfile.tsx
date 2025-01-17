@@ -5,7 +5,13 @@ import { Wrapper } from "./styled/Wrappers";
 import { ProfileContext } from "../context/ProfileContext";
 import { PrimaryButton } from "./styled/styledButtons";
 import { ActionProfileType } from "../reducers/profileReducer";
-import { Email, Name, TextInput } from "./styled/styledInputs";
+import {
+  Email,
+  Gender,
+  Name,
+  PurposeOfUse,
+  TextInput,
+} from "./styled/styledInputs";
 import { Heading2 } from "./styled/styledTextContent";
 import { getData, postData, putData } from "../services/serviceBase";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
@@ -251,13 +257,15 @@ export const UserProfile = ({
                     handleFieldChange("age", e.target.value);
                   }}
                 ></TextInput>
-                <TextInput
-                  aria-label="Gender"
-                  placeholder="Gender"
-                  name="Gender"
-                  value={gender !== "" ? gender : ""}
+                <Gender
                   onChange={(e) => handleFieldChange("gender", e.target.value)}
-                ></TextInput>
+                >
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                  <option value="Do not want to specify">
+                    Do not want to specify
+                  </option>
+                </Gender>
                 <TextInput
                   aria-label="Weight in kg"
                   placeholder="Weight in kg"
@@ -272,13 +280,13 @@ export const UserProfile = ({
                   value={height !== 0 ? height : ""}
                   onChange={(e) => handleFieldChange("height", e.target.value)}
                 ></TextInput>
-                <TextInput
-                  aria-label="Diagnos"
-                  placeholder="Diagnos"
-                  name="Diagnos"
-                  value={diagnos !== "" ? diagnos : ""}
+                <PurposeOfUse
                   onChange={(e) => handleFieldChange("diagnos", e.target.value)}
-                ></TextInput>
+                >
+                  <option value="Ataxia">Ataxia</option>
+                  <option value="Parkinsson">Parkinsson</option>
+                  <option value="Multiple sclerosis">Multiple sclerosis</option>
+                </PurposeOfUse>
                 <TextInput
                   aria-label="Physics level, 1-10"
                   placeholder="Physics level, 1-10"
