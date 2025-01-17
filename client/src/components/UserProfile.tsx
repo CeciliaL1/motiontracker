@@ -10,6 +10,8 @@ import { Heading2 } from "./styled/styledTextContent";
 import { getData, postData, putData } from "../services/serviceBase";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
 import { ErrorMessage } from "./styled/styledError";
+import { PersonalInfo } from "./PersonalInfo";
+import { StringFields, NumberFields } from "../models/FieldsType";
 
 interface IUserProfileProps {
   userProfile: IUserProfile[];
@@ -48,15 +50,6 @@ export const UserProfile = ({
     });
   }, [userProfile]);
 
-  type StringFields =
-    | "firstName"
-    | "lastName"
-    | "userName"
-    | "email"
-    | "gender"
-    | "diagnos";
-  type NumberFields = "age" | "weight" | "height" | "physicsLevel";
-
   const handleFieldChange = (
     field: StringFields | NumberFields,
     value: string
@@ -67,7 +60,7 @@ export const UserProfile = ({
       field === "height" ||
       field === "physicsLevel"
     ) {
-      const numericValue = Number(value); // Konvertera till nummer
+      const numericValue = Number(value);
       switch (field) {
         case "age":
           setAge(numericValue);
@@ -134,16 +127,15 @@ export const UserProfile = ({
       Authorization: `Bearer ${token}`,
     };
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
-
     const getProfile = await getData<IUserProfile>(
       `https://cecilial.hemsida.eu/api/profile/${userId}`,
       getHeaders
     );
 
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
     if (Object.keys(getProfile).length === 0) {
       const response = await postData<IUserProfile, IResponse>(
         `https://cecilial.hemsida.eu/api/profile/add`,
@@ -175,60 +167,18 @@ export const UserProfile = ({
       {!state && (
         <>
           <Wrapper direction="row" margintop={15} gap={50}>
-            <Wrapper
-              backgroundColor="EEE7DA"
-              padding={65}
-              direction="column"
-              margintop={1}
-              gap={5}
-              width={460}
-            >
-              <Heading2 marginbottom={20}>Personal information</Heading2>
-              <p>
-                Name:{" "}
-                <span>
-                  {firstName} {lastName}
-                </span>
-              </p>
-              <p>
-                Username: <span>{userName}</span>
-              </p>
-              <p>
-                Email: <span>{email}</span>
-              </p>
-            </Wrapper>
-            <Wrapper
-              backgroundColor="EEE7DA"
-              padding={30}
-              direction="column"
-              margintop={1}
-              gap={5}
-              width={460}
-            >
-              <Heading2 marginbottom={20}>
-                Workout specified information
-              </Heading2>
-              <>
-                <p>
-                  Age: <span>{age}</span>
-                </p>
-                <p>
-                  Gender: <span>{gender}</span>
-                </p>
-                <p>
-                  Weight: <span>{weight} kg</span>
-                </p>
-                <p>
-                  Height: <span>{height} cm</span>
-                </p>
-                <p>
-                  Diagnos: <span>{diagnos}</span>
-                </p>
-                <p>
-                  Physics level: <span>{physicsLevel}</span>
-                </p>
-              </>
-            </Wrapper>
+            <PersonalInfo
+              firstName={firstName}
+              lastName={lastName}
+              userName={userName}
+              email={email}
+              age={age}
+              gender={gender}
+              weight={weight}
+              height={height}
+              diagnos={diagnos}
+              physicsLevel={physicsLevel}
+            />
           </Wrapper>
 
           <Wrapper direction="row" margintop={6} gap={10}>
