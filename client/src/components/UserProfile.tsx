@@ -5,19 +5,12 @@ import { Wrapper } from "./styled/Wrappers";
 import { ProfileContext } from "../context/ProfileContext";
 import { PrimaryButton } from "./styled/styledButtons";
 import { ActionProfileType } from "../reducers/profileReducer";
-import {
-  Email,
-  Gender,
-  Name,
-  PurposeOfUse,
-  TextInput,
-} from "./styled/styledInputs";
-import { Heading2 } from "./styled/styledTextContent";
 import { getData, postData, putData } from "../services/serviceBase";
 import { getLocalStorage } from "../helperfuntions/getLocalStorage";
 import { ErrorMessage } from "./styled/styledError";
 import { PersonalInfo } from "./PersonalInfo";
 import { StringFields, NumberFields } from "../models/FieldsType";
+import { EditUserProfile } from "./EditUserProfile";
 
 interface IUserProfileProps {
   userProfile: IUserProfile[];
@@ -108,6 +101,7 @@ export const UserProfile = ({
   const handleEditProfile = () => {
     dispatch({ type: ActionProfileType.TOGGLE, payload: true });
   };
+
   const handleSaveEdit = async () => {
     const userId = loggedInUser.userId;
     const token = getLocalStorage<string>("token");
@@ -164,7 +158,6 @@ export const UserProfile = ({
         headers
       );
       setMessage(profileRespone.message);
-
       dispatch({ type: ActionProfileType.TOGGLE, payload: false });
     }
   };
@@ -206,100 +199,21 @@ export const UserProfile = ({
 
       {state && (
         <>
-          <Wrapper direction="row" margintop={15} gap={50}>
-            <Wrapper
-              backgroundColor="EEE7DA"
-              direction="column"
-              padding={30}
-              margintop={1}
-              gap={5}
-            >
-              <Heading2 marginbottom={20}>Personal information</Heading2>
-              <Name
-                aria-label="First Name"
-                value={firstName}
-                onChange={(e) => handleFieldChange("firstName", e.target.value)}
-              ></Name>
-              <Name
-                aria-label="Last name"
-                value={lastName}
-                onChange={(e) => handleFieldChange("lastName", e.target.value)}
-              ></Name>
-              <Name
-                aria-label="User name"
-                value={userName}
-                onChange={(e) => handleFieldChange("userName", e.target.value)}
-              ></Name>
-              <Email
-                aria-label="Email"
-                value={email}
-                onChange={(e) => handleFieldChange("email", e.target.value)}
-              ></Email>
-            </Wrapper>
-            <Wrapper
-              backgroundColor="EEE7DA"
-              direction="column"
-              padding={30}
-              margintop={1}
-              gap={5}
-            >
-              <Heading2 marginbottom={20}>
-                Workout specified information
-              </Heading2>
-
-              <>
-                <TextInput
-                  aria-label="Age"
-                  placeholder="Age"
-                  name="Age"
-                  value={age !== 0 ? age : ""}
-                  onChange={(e) => {
-                    handleFieldChange("age", e.target.value);
-                  }}
-                ></TextInput>
-                <Gender
-                  onChange={(e) => handleFieldChange("gender", e.target.value)}
-                >
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
-                  <option value="Do not want to specify">
-                    Do not want to specify
-                  </option>
-                </Gender>
-                <TextInput
-                  aria-label="Weight in kg"
-                  placeholder="Weight in kg"
-                  name="Weight"
-                  value={weight !== 0 ? weight : ""}
-                  onChange={(e) => handleFieldChange("weight", e.target.value)}
-                ></TextInput>
-                <TextInput
-                  aria-label="Height in cm"
-                  placeholder="Height in cm "
-                  name="Height"
-                  value={height !== 0 ? height : ""}
-                  onChange={(e) => handleFieldChange("height", e.target.value)}
-                ></TextInput>
-                <PurposeOfUse
-                  onChange={(e) => handleFieldChange("diagnos", e.target.value)}
-                >
-                  <option value="Ataxia">Ataxia</option>
-                  <option value="Parkinsson">Parkinsson</option>
-                  <option value="Multiple sclerosis">Multiple sclerosis</option>
-                </PurposeOfUse>
-                <TextInput
-                  aria-label="Physics level, 1-10"
-                  placeholder="Physics level, 1-10"
-                  name="PhysicsLevel"
-                  value={physicsLevel !== 0 ? physicsLevel : ""}
-                  onChange={(e) =>
-                    handleFieldChange("physicsLevel", e.target.value)
-                  }
-                ></TextInput>
-              </>
-            </Wrapper>
-          </Wrapper>
+          <Wrapper direction="row" margintop={15} gap={50}></Wrapper>
           <Wrapper direction="row" margintop={6} gap={10}>
+            <EditUserProfile
+              firstName={firstName}
+              lastName={lastName}
+              userName={userName}
+              email={email}
+              age={age}
+              gender={gender}
+              weight={weight}
+              height={height}
+              diagnos={diagnos}
+              physicsLevel={physicsLevel}
+              handleFieldChange={handleFieldChange}
+            ></EditUserProfile>
             <PrimaryButton
               aria-label="Save profile"
               marginbottom={50}
