@@ -16,17 +16,15 @@ export const GenerateWorkout = () => {
   const token = getLocalStorage<string>("token");
 
   const [schedule, setSchedule] = useState<IWorkoutScheduele>({});
-
   const [message, setMessage] = useState("");
-
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState("");
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [diagnos, setDiagnos] = useState("");
   const [physicsLevel, setPhysicsLevel] = useState(0);
-
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -92,9 +90,6 @@ export const GenerateWorkout = () => {
          Task 2: { task: "Wall Push-Ups", repetition: 8, done: false }
          Task 3: { task: "Arm Raises", repetition: 10, done: false }
         
-
-
-      
       Please generate the schedule for 30-days in this exact format, with the following changes each workout: 
       - Change tasks per day
       - 3 tasks per day
@@ -105,7 +100,6 @@ export const GenerateWorkout = () => {
       For each workout, the task name and repetitions should be clearly stated, and each workout should have a "done: false" flag. dont split it into weeks
 
       The client is a ${age} years old ${gender} and diagnosed with ${diagnos}. Their physical level is ${physicsLevel}, their height ${height} and weight are ${weight}
-
       `,
         },
         {
@@ -122,9 +116,7 @@ export const GenerateWorkout = () => {
       );
 
       const responseContent = response.choices[0].message.content;
-      console.log(responseContent);
       const parsedContent = parsedWorkoutContent(responseContent);
-      console.log(parsedContent);
 
       setSchedule(parsedContent);
       setIsLoading(false);
@@ -132,6 +124,7 @@ export const GenerateWorkout = () => {
       console.log(error);
     }
   };
+
   return (
     <>
       <Wrapper direction="row" margintop={13}>

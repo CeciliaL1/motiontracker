@@ -101,6 +101,7 @@ export const NavMenuLoggedIn = styled.nav<IMenyProps>`
     border-radius: 50%;
     background-color: #${(props) => props.background};
     font-size: ${(props) => props.size}rem;
+    cursor: pointer;
   }
 `;
 
