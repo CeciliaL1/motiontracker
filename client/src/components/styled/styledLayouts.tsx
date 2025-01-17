@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
+export const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
@@ -21,7 +21,7 @@ export const Header = styled.header`
   }
 `;
 
-export const Footer = styled.footer`
+export const StyledFooter = styled.footer`
   width: 100%;
   height: 300px;
   position: relative;
@@ -53,9 +53,7 @@ export const Footer = styled.footer`
     gap: 20px;
     margin-top: 30px;
   }
-  h2 {
-    margin-left: -12px;
-  }
+
   div {
     display: flex;
     flex-direction: column;
@@ -64,6 +62,7 @@ export const Footer = styled.footer`
   a {
     text-decoration: none;
     color: black;
+    cursor: pointer;
   }
   a:hover {
     text-decoration: underline;
