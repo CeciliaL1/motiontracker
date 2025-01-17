@@ -32,8 +32,10 @@ export const EditUserProfile = ({
   userName,
   email,
   age,
+  gender,
   weight,
   height,
+  diagnos,
   physicsLevel,
   handleFieldChange,
 }: IEditPersonalInfoProps) => {
@@ -87,7 +89,10 @@ export const EditUserProfile = ({
               handleFieldChange("age", e.target.value);
             }}
           ></TextInput>
-          <Gender onChange={(e) => handleFieldChange("gender", e.target.value)}>
+          <Gender
+            value={gender}
+            onChange={(e) => handleFieldChange("gender", e.target.value)}
+          >
             <option value="female">Female</option>
             <option value="male">Male</option>
             <option value="Do not want to specify">
@@ -109,6 +114,7 @@ export const EditUserProfile = ({
             onChange={(e) => handleFieldChange("height", e.target.value)}
           ></TextInput>
           <PurposeOfUse
+            value={diagnos}
             onChange={(e) => handleFieldChange("diagnos", e.target.value)}
           >
             <option value="Ataxia">Ataxia</option>
