@@ -32,6 +32,10 @@ Motiontracker is a webbapplication where you can sign in /sign up, set up a prof
 ## Final result
 
 
+## Google lighthouse performance
+
+![Skärmbild 2025-01-20 105050](https://github.com/user-attachments/assets/0356dcad-c266-4b91-963b-f016610b8266)
+
 
 ## Project directory
 
@@ -63,7 +67,7 @@ nodemon start
 
 
 
-## Lessons learned
+
 
 
 
