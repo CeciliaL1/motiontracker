@@ -1,16 +1,15 @@
 # MotionTracker
-## Thesis 
 
 ## Demolink
--[DemoLink](https://cecilial.hemsida.eu)
+- [MotionTracker](https://cecilial.hemsida.eu)
 
 
 ## Description
 Motiontracker targets individuals who are diagnosed with ataxi, parkinsson or MS and wants to strengthen their bodys and maintain their physic.
-Motiontracker is a webbapplication where you can sign in /sign up, set up a profile.  You input the motor issue and your physicslevel and with AI you can get a workout schedule generated fitting to your diagnos. The schedule can be saved to a calendar where you can get an overview of your schedule, click every induvidual workout and mark as complete or unmark the workout.
+Motiontracker is a webbapplication where you can sign in /sign up, set up a profile.  Once you set up your account and sign in, you can customize your profile by adding your personal details and workout preferences. After setting this up, you can generate a personalized workout plan. When you're satisfied with your schedule, simply save it to your calendar. The calendar provides an overview of your entire workout schedule, allowing you to click on specific dates to mark workouts as completed or adjust them as needed.
 
 ## Author
-- [@CeciliaL1](https://github.com/CeciliaL1)
+[@CeciliaL1](https://github.com/CeciliaL1)
 
 ## Project built with
 
