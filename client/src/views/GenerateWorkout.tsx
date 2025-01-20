@@ -21,7 +21,6 @@ export const GenerateWorkout = () => {
   let generated = Number(localStorage.getItem("generated"));
   const loggedInDate = getLocalStorage<string>("date");
 
-  console.log(generated);
   const [schedule, setSchedule] = useState<IWorkoutScheduele>({});
   const [message, setMessage] = useState("");
   const [age, setAge] = useState(0);
@@ -60,15 +59,12 @@ export const GenerateWorkout = () => {
     getUserData();
   }, [loggedInUser, token]);
 
-  const checkGeneratedCount = () => {
+  const generateWorkout = async () => {
     if (currentDate === loggedInDate && generated === 5) {
       setMessage("You have generated to the limit of 5 times.");
       return;
     }
-  };
-  const generateWorkout = async () => {
-    checkGeneratedCount();
-    if (message) {
+    if (message || isLoading === true) {
       return;
     }
 
@@ -76,7 +72,7 @@ export const GenerateWorkout = () => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    //setIsLoading(true);
+    setIsLoading(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -146,7 +142,7 @@ export const GenerateWorkout = () => {
 
   return (
     <>
-      <Wrapper direction="row" margintop={13}>
+      <Wrapper direction="row" margintop={13} gap={50}>
         <GenerateButton
           aria-label="Generate workout"
           onClick={() => {
@@ -155,6 +151,10 @@ export const GenerateWorkout = () => {
         >
           Generate<i className="fa-solid fa-wand-magic-sparkles"></i>
         </GenerateButton>
+
+        <div>
+          <p>Generated: {generated}/5 </p>
+        </div>
       </Wrapper>
       <Wrapper direction="row" margintop={1}>
         {message && (
