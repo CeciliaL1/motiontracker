@@ -10,11 +10,18 @@ import { IOpenAiResponse } from "../models/IOpenAi";
 import { parsedWorkoutContent } from "../helperfuntions/parseWorkoutContent";
 import { IWorkoutScheduele } from "../models/IWorkout";
 import { ErrorMessage } from "../components/styled/styledError";
+import { setLocalStorage } from "../helperfuntions/setLocalStorage";
 
 export const GenerateWorkout = () => {
+  const date = new Date();
+  const currentDate = date.toDateString();
+
   const loggedInUser = getLocalStorage<IUserLogin>("user");
   const token = getLocalStorage<string>("token");
+  let generated = Number(localStorage.getItem("generated"));
+  const loggedInDate = getLocalStorage<string>("date");
 
+  console.log(generated);
   const [schedule, setSchedule] = useState<IWorkoutScheduele>({});
   const [message, setMessage] = useState("");
   const [age, setAge] = useState(0);
@@ -49,18 +56,27 @@ export const GenerateWorkout = () => {
         setPhysicsLevel(user.physicsLevel);
       });
     };
+
     getUserData();
   }, [loggedInUser, token]);
 
+  const checkGeneratedCount = () => {
+    if (currentDate === loggedInDate && generated === 5) {
+      setMessage("You have generated to the limit of 5 times.");
+      return;
+    }
+  };
   const generateWorkout = async () => {
+    checkGeneratedCount();
     if (message) {
       return;
     }
+
     const date = new Date();
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    setIsLoading(true);
+    //setIsLoading(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -119,7 +135,10 @@ export const GenerateWorkout = () => {
       const parsedContent = parsedWorkoutContent(responseContent);
 
       setSchedule(parsedContent);
+
       setIsLoading(false);
+      generated++;
+      setLocalStorage("generated", generated);
     } catch (error) {
       console.log(error);
     }

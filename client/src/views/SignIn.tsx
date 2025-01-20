@@ -29,6 +29,9 @@ export const SignIn = () => {
   };
   const handleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    const date = new Date();
+
     const userData: ILoginUser = {
       userEmail: userEmail,
       userPassword: userPassword,
@@ -51,6 +54,9 @@ export const SignIn = () => {
       } else {
         setLocalStorage("user", response.user);
         setLocalStorage("token", response.token);
+        setLocalStorage("generated", 0);
+        setLocalStorage("date", date.toDateString());
+
         navigate("/calendar");
         dispatch({ type: ActionUserType.LOGIN, payload: response.user });
       }
